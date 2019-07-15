@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ToolsCharacter.Properties
+namespace ToolsCharacterForm.Properties
 {
 
 

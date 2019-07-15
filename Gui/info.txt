@@ -1,0 +1,25 @@
+Sur la première ligne 
+(EMILIO GRANDERS par exemple est requis) 
+le champ entre parenthèse est optionnel mais respecter les infos indiquès. 
+(o minuscule pour cercle, accent circonflex pour triangle et * étoile puis suivi d'un nom) entre parenthèses.
+
+Les textes requis :
+- Caractéristiques (carac) 
+- Capacités spéciales (capac)
+- Compétences (comp)
+- Ressources (res)
+- Cyber & brevets (cyber)
+
+En rouge gras tous les champs sont requis '?' correspond à un chiffre
+(EMP ? | CON ? | BT ? | INT ? | SF ? | MVT ? | REF ? | TEK(TECH) ? )
+
+En orange (Au moins une des capacitès spéciales ci-dessous) doit être indiqués
+SENS DU COMBAT(SDC) | FURTIVITE (FURT) | SYSTEME D | INTERFACE | AUTORITE | CHARISME(CHAR) | FIXER | MEDTECH(MEDTEK) | MEDIA | TECHI
+
+En vert gras : il faut minimum 2 indications (Indications des abrégés)
+(Baratin & Persuasion)		-> Baratin
+(Perception humaine) 		-> Perc. Hum.
+(Perception)				-> Perc.
+(Evaluation du risque)		-> Eval.
+(Connaissance de la merde)	-> Conn. merde
+(Commandement)				-> cmdt
