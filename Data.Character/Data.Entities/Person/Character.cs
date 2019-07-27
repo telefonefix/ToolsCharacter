@@ -19,14 +19,12 @@ namespace Data.Entities.Person
 
         #region Properties
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
         public Features[] Features { get; set; }
-
         public List<Skills> Skills { get; set; }
-
         public List<SpecialAbilities> SpecialAbilities { get; set; }
+        public List<Resources> Resources { get; set; }
+        public List<Patents> Patents { get; set; }
 
         public ICorporation Corpo { get; set; }
 
@@ -45,6 +43,8 @@ namespace Data.Entities.Person
             this._special = special ?? throw new ArgumentNullException(nameof(special));
             //this._corporation = CheckCorpo(corporation);
             this._corporation = corporation ?? throw new ArgumentNullException(nameof(corporation));
+
+            Init();
         }
         #endregion
 
@@ -60,9 +60,16 @@ namespace Data.Entities.Person
         #endregion
 
         #region Private Methods
-        private void SetFeature()
+
+        private void Init()
         {
             Features = new Features[Enum.GetValues(typeof(FeaturesList)).Length];
+            Skills = new List<Skills>();
+            SpecialAbilities = new List<SpecialAbilities>();
+        }
+
+        private void SetFeature()
+        {
 
             IEnumerable<FeaturesList> feat = Enum.GetValues(typeof(FeaturesList)).Cast<FeaturesList>();
             int i = 0;
@@ -76,42 +83,7 @@ namespace Data.Entities.Person
 
         }
 
-        // Pas mettre ici
-        //public void SetPerson(string name)
-        //{
-        //    char[] none = { '(', ')' };
-
-        //    if (name.Contains("("))
-        //    {
-        //        string corpo = name.Substring(name.IndexOf("("));
-        //        string tmp = corpo.Replace(" ", string.Empty);
-        //        name = name.Replace(corpo, tmp);
-
-        //    }
-
-        //    string[] n = name.Split(' ');
-
-
-
-
-        //    if (n.Length > 2)
-        //    {
-        //        FirstName = n[0];
-        //        LastName = n[1];
-        //    }
-        //    else
-        //    {
-        //        LastName = n[0];
-        //        FirstName = string.Empty;
-        //    }
-
-        //    // Personne travaille pour une corpo
-        //    if (n[n.Length - 1].Contains("("))
-        //    {
-        //        n[n.Length - 1] = n[n.Length - 1].Trim(none);
-        //        ManageCorpo(n[n.Length - 1]);
-        //    }
-        //}
+        
         // TODO: Renommer la méthode
         private void ManageCorpo(string corpo)
         {
@@ -162,10 +134,82 @@ namespace Data.Entities.Person
             return corpo;
         }
 
+
+        private void GetFeatures(IDictionary<string, int> features)
+        {   
+            List<Features> featureList = new List<Features>();
+
+            foreach (var f in features)
+            {
+                Features feature = new Features();
+                feature.Name = f.Key;
+                feature.Value = f.Value;
+
+                featureList.Add(feature);
+            }
+            Features = featureList.ToArray();
+        }
+
+        private void GetCharacterize<T>(T t,Dictionary<string,int> dictionary)
+        {
+            List<T> characterizeList = new List<T>();
+
+            foreach (var d in dictionary)
+            {   
+                // = d.Key;
+                //t = d.Value;
+
+                characterizeList.Add(t);
+            }
+            
+
+            switch (t)
+            {
+                case Features f:
+                    Features = characterizeList.ToArray();
+                    break;
+                case Skills s:
+                    break;
+                case SpecialAbilities s:
+                    break;
+                case Resources r:
+                    break;
+                case Patents p:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void CreateCharacter(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
+        }
+
+        public void CreateCharacter(string firstName, string lastName, IDictionary<string, int> features)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            int i = 0;
+            foreach (var f in features)
+            {
+                _feature = new Features();
+                _feature.Name = f.Key;
+                _feature.Value = f.Value;
+
+                Features.SetValue(_feature, i);
+                i++;
+            }
+
+        }
+
+        public void CreateCharacter(string firstName, string lastName, IDictionary<string, int> features, IDictionary<string, int> skills, IDictionary<string, int> specials, IDictionary<string, int> resources, IEnumerable<string> patents)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            GetFeatures(features);
+
         }
         #endregion
     }

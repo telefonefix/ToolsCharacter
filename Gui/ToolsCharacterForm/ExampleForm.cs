@@ -19,9 +19,10 @@ namespace ToolsCharacterForm
             GetExample();
         }
 
-        private void btn_Ok_Click(object sender, EventArgs e)
+        private void Btn_Ok_Click(object sender, EventArgs e)
         {
             this.Close();
+            
         }
 
         private void GetExample()
@@ -29,7 +30,7 @@ namespace ToolsCharacterForm
             rTxtBox_Example.LoadFile(@".\example.rtf");
         }
 
-        private void rTxtBox_Example_MouseEnter(object sender, EventArgs e)
+        private void RTxtBox_Example_MouseEnter(object sender, EventArgs e)
         {
             toolTip_example.SetToolTip(this.rTxtBox_Example, File.ReadAllText(@".\info.txt"));
         }

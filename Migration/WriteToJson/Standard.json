@@ -1,0 +1,42 @@
+{
+  "Caracteristiques": {
+    "BEAU": "BT",
+    "INTEL": "INT",
+    "MV": "MVT",
+    "REFLEX": "REF",
+    "SANGF": "SF",
+    "TEK": "TECH"
+  },
+  "Capacites speciales": {
+    "AUTHOR": "AUTORITE",
+    "AUTOR": "AUTORITE",
+    "AUTORITÉ": "AUTOR",
+    "FIX": "FIXER",
+    "FUR": "FURTIF",
+    "PERSUAD": "PERSUADERS",
+    "SDC": "SENS_DU_COMBAT",
+    "TEK": "TECHIE",
+    "TEKMED": "TECHMED"
+  },
+  "Competences": {
+    "COND AUTO": "AUTOMOBILE",
+    "COND TRAIN": "TRAIN",
+    "COND AV": "AV",
+    "COND MOTO": "MOTO",
+    "CONDAUTO": "AUTOMOBILE",
+    "CONDTRAIN": "TRAIN",
+    "CONDAV": "AV",
+    "CONDMOTO": "MOTO",
+    "CONN MERDE": "CONN._MERDE",
+    "CONN SYSTEME": "CONN._SYSTEME",
+    "CONN SYSTEMES": "CONN._SYSTEMES",
+    "CONNMERDE": "CONN._MERDE",
+    "CONNSYSTEME": "CONN._SYSTEME",
+    "CONNSYSTEMES": "CONN._SYSTEMES",
+    "NEGO": "NEGOCIATION",
+    "PHUMAINE": "PERC_HUMAINE",
+    "PIKPOKET": "PICKPOCKET",
+    "SECACHER": "SE_CACHER",
+    "SMH": "SURVIE_MILIEU_HOSTILE"
+  }
+}

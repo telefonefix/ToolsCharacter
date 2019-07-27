@@ -26,7 +26,7 @@ namespace ToolsCharacterForm
             InitializeComponent();
         }
 
-        private void btn_Serial_Click(object sender, EventArgs e)
+        private void Btn_Serial_Click(object sender, EventArgs e)
         {
             TryImport();
 
@@ -45,8 +45,8 @@ namespace ToolsCharacterForm
         {
             try
             {
-                ImportData import = new ImportData(txtBox_Appt.Text);
-                import.ImportText();
+                ImportData import = new ImportData();
+                import.ImportText(txtBox_Appt.Text);
             }
             catch (CharacterException e)
             {
@@ -55,12 +55,12 @@ namespace ToolsCharacterForm
                 
         }
 
-        private void btn_ToDB_Click(object sender, EventArgs e)
+        private void Btn_ToDB_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btn_Clear_Click(object sender, EventArgs e)
+        private void Btn_Clear_Click(object sender, EventArgs e)
         {
             ClearTextBox();
         }
@@ -76,7 +76,7 @@ namespace ToolsCharacterForm
                         MessageBox.Show(e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);                        
                         break;
                     case Error.InvalidData:
-                        dialog = MessageBox.Show(string.Concat(e.Message, System.Environment.NewLine, "Voulez-vous effacer le contenu ?"), "Erreur", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        dialog = MessageBox.Show(string.Concat(e.Message, Environment.NewLine, Environment.NewLine, "Voulez-vous effacer le contenu ?"), "Erreur", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                         break;
                     default:
                         break;
@@ -96,7 +96,7 @@ namespace ToolsCharacterForm
             txtBox_Appt.Clear();
         }
 
-        private void btn_Example_Click(object sender, EventArgs e)
+        private void Btn_Example_Click(object sender, EventArgs e)
         {
             ExampleForm form = new ExampleForm();
             form.ShowDialog();

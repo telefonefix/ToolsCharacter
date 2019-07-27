@@ -20,7 +20,15 @@ namespace Data.Entities.Person
 
         ICorporation Corpo { get; set; }
 
-        void CreateCharacter(string firstName,string lastName);
+        void CreateCharacter(
+            string firstName,
+            string lastName,
+            IDictionary<string, int> features,
+            IDictionary<string,int> skills,
+            IDictionary<string, int> specials,
+            IDictionary<string, int> resources,
+            IEnumerable<string> patents
+            );
     }
 
 }

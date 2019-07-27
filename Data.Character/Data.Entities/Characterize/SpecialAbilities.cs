@@ -1,12 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Data.Entities.Characterize
+﻿namespace Data.Entities.Characterize
 {
+
+    public enum SpecialAbilitiesList
+    {
+        Sens_du_combat,
+        Furtif,        
+        Interface,
+        Autorite,
+        Charisme,
+        Persuaders,
+        Fixer,
+        Techmed,
+        Media,
+        Techi
+    }
+
     public class SpecialAbilities : IRepository<SpecialAbilities>
     {
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Value { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get; set; }
+        public int Value { get; set; }
     }
 }

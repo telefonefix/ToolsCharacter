@@ -44,7 +44,7 @@
             this.btn_Serial.TabIndex = 3;
             this.btn_Serial.Text = "Exporter en Json";
             this.btn_Serial.UseVisualStyleBackColor = true;
-            this.btn_Serial.Click += new System.EventHandler(this.btn_Serial_Click);
+            this.btn_Serial.Click += new System.EventHandler(this.Btn_Serial_Click);
             // 
             // btn_ToDB
             // 
@@ -54,7 +54,7 @@
             this.btn_ToDB.TabIndex = 4;
             this.btn_ToDB.Text = "Exporter vers Base";
             this.btn_ToDB.UseVisualStyleBackColor = true;
-            this.btn_ToDB.Click += new System.EventHandler(this.btn_ToDB_Click);
+            this.btn_ToDB.Click += new System.EventHandler(this.Btn_ToDB_Click);
             // 
             // btn_Clear
             // 
@@ -64,7 +64,7 @@
             this.btn_Clear.TabIndex = 5;
             this.btn_Clear.Text = "Vider le texte";
             this.btn_Clear.UseVisualStyleBackColor = true;
-            this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
+            this.btn_Clear.Click += new System.EventHandler(this.Btn_Clear_Click);
             // 
             // txtBox_Appt
             // 
@@ -82,7 +82,7 @@
             this.btn_Example.TabIndex = 6;
             this.btn_Example.Text = "Exemple";
             this.btn_Example.UseVisualStyleBackColor = true;
-            this.btn_Example.Click += new System.EventHandler(this.btn_Example_Click);
+            this.btn_Example.Click += new System.EventHandler(this.Btn_Example_Click);
             // 
             // label1
             // 

@@ -39,5 +39,5 @@ namespace Data.Entities.Characterize
         TECH = 5,
         INT = 6,
         REF = 7
-    }
+    }   
 }

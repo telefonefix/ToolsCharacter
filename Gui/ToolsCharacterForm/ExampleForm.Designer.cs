@@ -42,7 +42,7 @@
             this.btn_Ok.TabIndex = 7;
             this.btn_Ok.Text = "OK";
             this.btn_Ok.UseVisualStyleBackColor = true;
-            this.btn_Ok.Click += new System.EventHandler(this.btn_Ok_Click);
+            this.btn_Ok.Click += new System.EventHandler(this.Btn_Ok_Click);
             // 
             // rTxtBox_Example
             // 
@@ -53,7 +53,7 @@
             this.rTxtBox_Example.Size = new System.Drawing.Size(920, 448);
             this.rTxtBox_Example.TabIndex = 8;
             this.rTxtBox_Example.Text = "";
-            this.rTxtBox_Example.MouseEnter += new System.EventHandler(this.rTxtBox_Example_MouseEnter);
+            this.rTxtBox_Example.MouseEnter += new System.EventHandler(this.RTxtBox_Example_MouseEnter);
             // 
             // ExampleForm
             // 
