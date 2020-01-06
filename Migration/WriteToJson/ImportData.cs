@@ -235,7 +235,7 @@ namespace WriteToJson
             }
 
             List<string> pattern = new List<string>();
-
+            
             switch (field)
             {
                 case FieldsList.Carac:
@@ -246,7 +246,8 @@ namespace WriteToJson
                     return CheckItems(characterize, _specialAbilities, false);
 
                 case FieldsList.Comp:
-                    characterize = Standardize(new SkillsList(), Regex.Replace(lineCharacterize, @"\s+", " ").Split(' '));
+                    Regex.Replace(lineCharacterize, @"\s+", " ");
+                    characterize = Standardize(new SkillsList(), Regex.Replace(FixIt(lineCharacterize), @"\s+", " ").Split(' '));
                     return CheckItems(characterize);
 
                 case FieldsList.Res:
@@ -258,6 +259,30 @@ namespace WriteToJson
                 default:
                     return true;
             }
+        }
+
+        private string FixIt(string input)
+        {
+            string output = string.Empty;
+            List<string> lstTmp = new List<string>();
+            lstTmp.AddRange(input.Split(' '));
+            lstTmp.Remove(string.Empty);
+            int value = 0;
+
+            for(int i = 0; i < lstTmp.Count-1; i++)
+            {            
+                if (i%2 == 0)
+                {
+                    if (!Int32.TryParse(lstTmp[i+1],out value))
+                    {
+                        lstTmp[i] += "_" + lstTmp[i+1];
+                        lstTmp.RemoveAt(i + 1);                       
+                    }
+                }
+                output = string.Concat(output, lstTmp[i], " ");
+            }
+            output = string.Concat(output, lstTmp[lstTmp.Count - 1]);
+            return output;
         }
 
         private bool CheckItems(string[] datas, List<string> pattern, bool allFields = false)
@@ -420,6 +445,8 @@ namespace WriteToJson
             IDictionary<string, string> standard = new Dictionary<string, string>();
 
             listDatas.AddRange(datas);
+            listDatas.Remove(string.Empty);
+
             int index;
             string type = string.Empty;
             try
@@ -456,6 +483,7 @@ namespace WriteToJson
             foreach (KeyValuePair<string, string> s in standard)
             {
                 index = listDatas.IndexOf(listDatas.Find(d => d.ToUpper() == s.Key.ToUpper()));
+                if (index < 0) continue;
                 try
                 {
                     listDatas[index]
@@ -469,7 +497,6 @@ namespace WriteToJson
                 }
             }
 
-            listDatas.Remove(string.Empty);
             return listDatas.ToArray();
         }
 
