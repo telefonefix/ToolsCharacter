@@ -170,7 +170,7 @@ namespace WriteToJson
             }
 
 
-            //string[] skills = Standardize(new Skills(), out string[] skills);
+            //string[] skills = Standardize(new Skills(), string[] skills);
             if (!CheckCharacterize(FieldsList.Comp, out string[] skills))
             {
                 throw new CharacterException(string.Concat(_missed));

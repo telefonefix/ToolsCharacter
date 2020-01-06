@@ -6,7 +6,10 @@ namespace Data.Entities.Corporation
 {
     public class Corporation : ICorporation
     {
+        #region Attributs
         private IGrade _grade;
+        
+
         public IGrade Grade {
             get
             {
@@ -17,7 +20,9 @@ namespace Data.Entities.Corporation
                 _grade = value;
             }
         }
+        #endregion Attributs
 
+        #region Properties
         public string Name { get; set; }
 
         public Corporation(IGrade grade)
@@ -25,7 +30,9 @@ namespace Data.Entities.Corporation
             _grade = grade;
             //SetGrade(grade);
         }
+        #endregion Properties
 
+        // TODO : A voir s'il faut supprimer
         private void SetGrade(Grade grade)
         {
             Grade = new Grade()
@@ -41,6 +48,7 @@ namespace Data.Entities.Corporation
             _grade = grade;            
         }
 
+        // Category (Circle, Triangle, Star)
         public void CreateCorporation(string name, Category category, int qty)
         {
             Name = name;

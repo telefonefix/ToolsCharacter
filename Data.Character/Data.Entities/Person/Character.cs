@@ -166,6 +166,7 @@ namespace Data.Entities.Person
             switch (t)
             {
                 case Features f:
+                    //Array.FindIndex()
                     //Features = characterizeList.ToArray();
                     break;
                 case Skills s:
