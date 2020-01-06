@@ -6,17 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.3" />
+    <PackageReference Include="Autofac" Version="4.9.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Data.Entities\Data.Entities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\..\packages\Autofac.4.9.2\lib\netstandard2.0\Autofac.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
