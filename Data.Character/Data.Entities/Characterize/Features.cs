@@ -6,11 +6,9 @@ namespace Data.Entities.Characterize
 {
     public class Features : IRepository<Features>
     {
-        //private FeatureList _featureName;
-
-
         public string Name { get; set; }
         public int Value { get; set; }
+        public int Id { get; }
 
         public bool checkName(string name)
         {

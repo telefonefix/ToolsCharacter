@@ -7,5 +7,15 @@ namespace Data.Entities.Characterize
     public interface IPatents
     {
         string Name { get; set; }
+
+        int Price { get; set; }
+
+        int Empathy { get; set; }
+
+        string Description { get; set; }
+
+        Dictionary<Features, int> Features { get; set; }
+
+        Dictionary<Skills, int> Skills { get; set; }
     }
 }

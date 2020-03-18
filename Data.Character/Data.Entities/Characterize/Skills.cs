@@ -15,7 +15,12 @@ namespace Data.Entities.Characterize
 
     public class Skills : IRepository<Skills>
     {
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Value { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get; set; }
+        public int Value { get; set; }
+        public int Id { get; }
+
+        // A skill depends on a features (Id)
+        public int IdFeatures { get; }
+
     }
 }
