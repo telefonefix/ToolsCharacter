@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace WriteToJson
+namespace Data.Factories
 {
     public static class Standardization
     {

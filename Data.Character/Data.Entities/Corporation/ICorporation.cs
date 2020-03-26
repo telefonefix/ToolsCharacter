@@ -10,8 +10,5 @@ namespace Data.Entities.Corporation
         string Name { get; set; }
 
         IGrade Grade { get; set; }
-
-        void CreateCorporation(string name,IGrade grade);
-        void CreateCorporation(string name,Category category,int qty);
     }
 }

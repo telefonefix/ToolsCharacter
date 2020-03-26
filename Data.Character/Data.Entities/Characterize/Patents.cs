@@ -5,7 +5,7 @@ using System.Text;
 namespace Data.Entities.Characterize
 {
     public class Patents : IPatents
-    {
+    {        
         public string Name { get; set; }
 
         public int Price { get; set; }
@@ -18,5 +18,6 @@ namespace Data.Entities.Characterize
 
         public Dictionary<Skills, int> Skills { get; set; }
 
+        public int Id { get; }
     }
 }

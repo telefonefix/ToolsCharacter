@@ -19,16 +19,6 @@ namespace Data.Entities.Person
         List<SpecialAbilities> SpecialAbilities { get; set; }
 
         ICorporation Corpo { get; set; }
-
-        void CreateCharacter(
-            string firstName,
-            string lastName,
-            IDictionary<string, int> features,
-            IDictionary<string,int> skills,
-            IDictionary<string, int> specials,
-            IDictionary<string, int> resources,
-            IEnumerable<string> patents
-            );
     }
 
 }

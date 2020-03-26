@@ -8,23 +8,7 @@ namespace Data.Entities.Characterize
     {
         public string Name { get; set; }
         public int Value { get; set; }
-        public int Id { get; }
-
-        public bool checkName(string name)
-        {
-            // TODO : Faire le check si un nouveau nom est entrée
-            try
-            {
-                //_featureName.CompareTo(name);
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
-
-            return false;
-        }
+        public int Id { get; set; }
     }
 
     public enum FeaturesList

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WriteToJson;
 
@@ -17,42 +10,81 @@ namespace ToolsCharacterForm
         InvalidData
     }
 
-
+    
 
     public partial class ToolsForm : Form
     {
+        private bool _genderValidated;
+        private string _gender;
+        //public string GenderName { get; private set; }
         public ToolsForm()
         {
             InitializeComponent();
+            _genderValidated = false;
+            btnChangeGender.Enabled = false;           
         }
 
         private void Btn_Serial_Click(object sender, EventArgs e)
         {
-            TryImport();
+            if (string.IsNullOrWhiteSpace(txtBox_Appt.Text))
+            {
+                MessageBox.Show("Aucune donnée à extraire", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-
-
-
-            //Export export = new Export(import.Appointement);
-
-            //export.SetAppointment();
-
-            //if (GetErrorMessage(export.Exp)) return;
-
+            while (!_genderValidated)
+            {
+                FrmGender frm = new FrmGender();
+                if (frm.ShowDialog().Equals(DialogResult.OK))
+                {
+                    _gender = frm.GenderValue;
+                    _genderValidated = true;
+                    btnChangeGender.Enabled = true;
+                }
+            }
+            Export();
         }
 
-        private void TryImport()
+        private void Export()
         {
+            string message;
             try
             {
                 ImportData import = new ImportData();
-                import.ImportText(txtBox_Appt.Text);
+                import.ImportText(txtBox_Appt.Text, _gender);
+                if (import.Success)
+                {
+                    message = import.Message + Environment.NewLine + "Voulez-vous exporter un autre personnage ?";
+                    DialogResult answer = MessageBox.Show(message, "Succés", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                    switch (answer)
+                    {
+                        case DialogResult.None:
+                            break;
+                        case DialogResult.OK:
+                            break;
+                        case DialogResult.Cancel:
+                            break;
+                        case DialogResult.Abort:
+                            break;
+                        case DialogResult.Retry:
+                            break;
+                        case DialogResult.Ignore:
+                            break;
+                        case DialogResult.Yes:
+                            btn_Clear.PerformClick();
+                            break;
+                        case DialogResult.No:
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
             catch (CharacterException e)
             {
                 GetErrorMessage(e, Error.InvalidData);
             }
-                
         }
 
         private void Btn_ToDB_Click(object sender, EventArgs e)
@@ -62,18 +94,20 @@ namespace ToolsCharacterForm
 
         private void Btn_Clear_Click(object sender, EventArgs e)
         {
+            _genderValidated = false;
+            btnChangeGender.Enabled = false;
             ClearTextBox();
         }
 
-        private bool GetErrorMessage(CharacterException e,Error error)
+        private bool GetErrorMessage(CharacterException e, Error error)
         {
-            DialogResult dialog = DialogResult.Yes; 
+            DialogResult dialog = DialogResult.Yes;
             if (e != null)
             {
                 switch (error)
                 {
                     case Error.Empty:
-                        MessageBox.Show(e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);                        
+                        MessageBox.Show(e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case Error.InvalidData:
                         dialog = MessageBox.Show(string.Concat(e.Message, Environment.NewLine, Environment.NewLine, "Voulez-vous effacer le contenu ?"), "Erreur", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
@@ -101,6 +135,12 @@ namespace ToolsCharacterForm
             ExampleForm form = new ExampleForm();
             form.ShowDialog();
 
+        }
+
+        private void btnChangeGender_MouseClick(object sender, MouseEventArgs e)
+        {
+            FrmGender frm = new FrmGender();
+            frm.ShowDialog();
         }
     }
 }

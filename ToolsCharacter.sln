@@ -5,15 +5,15 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data.Character", "Data.Character", "{F4D6FC39-0121-4E82-B873-93E7BF1D1597}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Entities", "Data.Character\Data.Entities\Data.Entities.csproj", "{EADEF0E4-B76A-48B1-9972-A937B495601E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Entities", "Data.Character\Data.Entities\Data.Entities.csproj", "{EADEF0E4-B76A-48B1-9972-A937B495601E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Factories", "Data.Character\Data.Factories\Data.Factories.csproj", "{D6897706-E75F-4C9A-9005-2087FCF635A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Factories", "Data.Character\Data.Factories\Data.Factories.csproj", "{D6897706-E75F-4C9A-9005-2087FCF635A6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migration", "Migration", "{FEE89CB2-7F8A-4C79-860A-77A95EE7D7DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriteToJson", "Migration\WriteToJson\WriteToJson.csproj", "{A7D2092B-3F6A-4CAF-91A7-AD2DAFDAF276}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WriteToJson", "Migration\WriteToJson\WriteToJson.csproj", "{A7D2092B-3F6A-4CAF-91A7-AD2DAFDAF276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportToDB", "Migration\ExportToDB\ExportToDB.csproj", "{1ACC24E4-15BB-47B8-A440-EF777BF9068B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExportToDB", "Migration\ExportToDB\ExportToDB.csproj", "{1ACC24E4-15BB-47B8-A440-EF777BF9068B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gui", "Gui", "{5AAE83AF-A2EC-4CD1-A316-FF7545253095}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShouldBe", "ShouldBe", "{46777701-C7C8-4071-B5C6-AF1980390140}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriteToJson.Test", "Test\WriteToJson.Test\WriteToJson.Test.csproj", "{3501BAA5-9080-437F-8336-96C488F8B421}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Json.Output", "Json.Output", "{9DA7FD5C-D74D-425E-B316-0D5E4DDE743F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

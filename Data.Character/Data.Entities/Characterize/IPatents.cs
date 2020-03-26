@@ -6,6 +6,8 @@ namespace Data.Entities.Characterize
 {
     public interface IPatents
     {
+        int Id { get; }
+
         string Name { get; set; }
 
         int Price { get; set; }

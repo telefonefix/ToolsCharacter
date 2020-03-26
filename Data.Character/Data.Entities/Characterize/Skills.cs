@@ -17,10 +17,8 @@ namespace Data.Entities.Characterize
     {
         public string Name { get; set; }
         public int Value { get; set; }
-        public int Id { get; }
-
-        // A skill depends on a features (Id)
-        public int IdFeatures { get; }
+        public int Id { get; set; }       
+        public int IdFeatures { get; set; }
 
     }
 }

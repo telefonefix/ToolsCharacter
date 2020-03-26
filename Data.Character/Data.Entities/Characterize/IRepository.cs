@@ -6,7 +6,7 @@ namespace Data.Entities.Characterize
 {
     public interface IRepository<T>
     {
-        int Id { get; }
+        int Id { get; set; }
 
         string Name { get; set; }
 

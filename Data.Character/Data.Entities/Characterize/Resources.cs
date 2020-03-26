@@ -1,9 +1,9 @@
 ﻿namespace Data.Entities.Characterize
 {
-    public class Resources : IRepository<Resources>
+    public class Ressources : IRepository<Ressources>
     {
         public string Name { get; set; }
         public int Value { get; set; }
-        public int Id { get; }
+        public int Id { get; set; }
     }
 }

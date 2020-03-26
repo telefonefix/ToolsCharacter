@@ -34,11 +34,12 @@
             this.txtBox_Appt = new System.Windows.Forms.TextBox();
             this.btn_Example = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnChangeGender = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_Serial
             // 
-            this.btn_Serial.Location = new System.Drawing.Point(602, 465);
+            this.btn_Serial.Location = new System.Drawing.Point(490, 465);
             this.btn_Serial.Name = "btn_Serial";
             this.btn_Serial.Size = new System.Drawing.Size(106, 24);
             this.btn_Serial.TabIndex = 3;
@@ -48,7 +49,7 @@
             // 
             // btn_ToDB
             // 
-            this.btn_ToDB.Location = new System.Drawing.Point(714, 465);
+            this.btn_ToDB.Location = new System.Drawing.Point(602, 465);
             this.btn_ToDB.Name = "btn_ToDB";
             this.btn_ToDB.Size = new System.Drawing.Size(106, 24);
             this.btn_ToDB.TabIndex = 4;
@@ -58,6 +59,7 @@
             // 
             // btn_Clear
             // 
+            this.btn_Clear.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Clear.Location = new System.Drawing.Point(826, 465);
             this.btn_Clear.Name = "btn_Clear";
             this.btn_Clear.Size = new System.Drawing.Size(106, 24);
@@ -93,13 +95,27 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Insérer le texte ci-dessous";
             // 
+            // btnChangeGender
+            // 
+            this.btnChangeGender.Location = new System.Drawing.Point(714, 465);
+            this.btnChangeGender.Name = "btnChangeGender";
+            this.btnChangeGender.Size = new System.Drawing.Size(106, 24);
+            this.btnChangeGender.TabIndex = 3;
+            this.btnChangeGender.Text = "Changer le genre";
+            this.btnChangeGender.UseVisualStyleBackColor = true;
+            this.btnChangeGender.Click += new System.EventHandler(this.Btn_Serial_Click);
+            this.btnChangeGender.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnChangeGender_MouseClick);
+            // 
             // ToolsForm
             // 
+            this.AcceptButton = this.btn_Serial;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_Clear;
             this.ClientSize = new System.Drawing.Size(944, 501);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_Example);
+            this.Controls.Add(this.btnChangeGender);
             this.Controls.Add(this.btn_Serial);
             this.Controls.Add(this.btn_ToDB);
             this.Controls.Add(this.btn_Clear);
@@ -107,7 +123,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ToolsForm";
-            this.Text = "Gestionnaire de personnage";
+            this.Text = "Outil importation de personnage";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,5 +137,6 @@
         private System.Windows.Forms.TextBox txtBox_Appt;
         private System.Windows.Forms.Button btn_Example;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnChangeGender;
     }
 }
