@@ -19,6 +19,7 @@ namespace Data.Entities.Characterize
         public int Value { get; set; }
         public int Id { get; set; }       
         public int IdFeatures { get; set; }
+        public int AcquiredPoint { get; set; }
 
     }
 }

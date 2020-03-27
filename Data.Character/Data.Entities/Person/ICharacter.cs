@@ -12,6 +12,8 @@ namespace Data.Entities.Person
 
         string LastName { get; set; }
 
+        Gender Gender { get; set; }
+
         Features[] Features { get; set; }
 
         List<Skills> Skills { get; set; }

@@ -38,9 +38,7 @@ namespace ToolsCharacterForm
 
                 DialogResult dialogResult = frm.ShowDialog();
                 switch (dialogResult)
-                {
-                    case DialogResult.None:
-                        break;
+                {  
                     case DialogResult.OK:
                         _gender = frm.GenderValue;
                         _genderValidated = true;
@@ -48,18 +46,8 @@ namespace ToolsCharacterForm
                         break;
                     case DialogResult.Cancel:
                         return;
-                    case DialogResult.Abort:
-                        break;
-                    case DialogResult.Retry:
-                        break;
-                    case DialogResult.Ignore:
-                        break;
-                    case DialogResult.Yes:
-                        break;
-                    case DialogResult.No:
-                        break;
                     default:
-                        break;
+                        return;
                 }
             }
             Export();
@@ -70,7 +58,7 @@ namespace ToolsCharacterForm
             string message;
             try
             {
-                ImportData import = new ImportData();
+                ExportToJson import = new ExportToJson();
                 import.ImportText(txtBox_Appt.Text, _gender);
                 if (import.Success)
                 {
@@ -109,7 +97,7 @@ namespace ToolsCharacterForm
 
         private void Btn_ToDB_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void Btn_Clear_Click(object sender, EventArgs e)
@@ -157,10 +145,22 @@ namespace ToolsCharacterForm
 
         }
 
-        private void btnChangeGender_MouseClick(object sender, MouseEventArgs e)
+        private void btnChangeGender_Click(object sender, EventArgs e)
         {
             FrmGender frm = new FrmGender();
-            frm.ShowDialog();
+            DialogResult dialogResult = frm.ShowDialog();
+            switch (dialogResult)
+            {
+                case DialogResult.OK:
+                    _gender = frm.GenderValue;
+                    _genderValidated = true;
+                    btnChangeGender.Enabled = true;
+                    break;
+                case DialogResult.Cancel:
+                    return;
+                default:
+                    return;
+            }
         }
     }
 }

@@ -34,6 +34,7 @@ namespace Data.Factories
         public string Name { get; set; }
         public string FirstName { get; set; }
         public string Pseudo { get; set; }
+        public string Noun { get; set; }
         //public IDictionary<string, int> Features { get; set; }
         public Features[] Features { get; set; }
         public List<Skills> Skills { get; set; }
@@ -132,6 +133,10 @@ namespace Data.Factories
                 {"Femme",Gender.Female },
                 {"Cyber Robot",Gender.CyberRobot }
             };
+
+            Gender genderEnum = Gender.Male;
+            dicGender.TryGetValue(gender, out genderEnum);
+            Noun = gender;
 
             try
             {

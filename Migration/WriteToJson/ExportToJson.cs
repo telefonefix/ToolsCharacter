@@ -11,10 +11,8 @@ using System.Text.RegularExpressions;
 
 namespace WriteToJson
 {
-   
 
-
-    public class ImportData
+    public class ExportToJson
     {
         #region Attributs        
         private List<string> _characterize;
@@ -33,7 +31,7 @@ namespace WriteToJson
         #endregion
 
         #region Constructor
-        public ImportData()
+        public ExportToJson()
         {
             Init();
         }

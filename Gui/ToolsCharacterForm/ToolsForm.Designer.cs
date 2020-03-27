@@ -103,8 +103,7 @@
             this.btnChangeGender.TabIndex = 3;
             this.btnChangeGender.Text = "Changer le genre";
             this.btnChangeGender.UseVisualStyleBackColor = true;
-            this.btnChangeGender.Click += new System.EventHandler(this.Btn_Serial_Click);
-            this.btnChangeGender.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnChangeGender_MouseClick);
+            this.btnChangeGender.Click += new System.EventHandler(this.btnChangeGender_Click);
             // 
             // ToolsForm
             // 
