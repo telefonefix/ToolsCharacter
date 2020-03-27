@@ -12,7 +12,7 @@ namespace Data.Entities.Person
 
         string LastName { get; set; }
 
-        Gender Gender { get; set; }
+        string Noun { get; set; }
 
         Features[] Features { get; set; }
 

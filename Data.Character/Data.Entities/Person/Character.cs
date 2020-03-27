@@ -38,6 +38,7 @@ namespace Data.Entities.Person
         public ICorporation Corpo { get; set; }
 
         public int Chance { get; set; }
+        public string Noun { get; set; }
         #endregion
 
         #region Constructor
