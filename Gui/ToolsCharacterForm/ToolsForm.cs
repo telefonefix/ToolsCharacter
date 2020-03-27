@@ -35,11 +35,31 @@ namespace ToolsCharacterForm
             while (!_genderValidated)
             {
                 FrmGender frm = new FrmGender();
-                if (frm.ShowDialog().Equals(DialogResult.OK))
+
+                DialogResult dialogResult = frm.ShowDialog();
+                switch (dialogResult)
                 {
-                    _gender = frm.GenderValue;
-                    _genderValidated = true;
-                    btnChangeGender.Enabled = true;
+                    case DialogResult.None:
+                        break;
+                    case DialogResult.OK:
+                        _gender = frm.GenderValue;
+                        _genderValidated = true;
+                        btnChangeGender.Enabled = true;
+                        break;
+                    case DialogResult.Cancel:
+                        return;
+                    case DialogResult.Abort:
+                        break;
+                    case DialogResult.Retry:
+                        break;
+                    case DialogResult.Ignore:
+                        break;
+                    case DialogResult.Yes:
+                        break;
+                    case DialogResult.No:
+                        break;
+                    default:
+                        break;
                 }
             }
             Export();

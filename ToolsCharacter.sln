@@ -24,6 +24,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriteToJson.Test", "Test\WriteToJson.Test\WriteToJson.Test.csproj", "{3501BAA5-9080-437F-8336-96C488F8B421}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Json.Output", "Json.Output", "{9DA7FD5C-D74D-425E-B316-0D5E4DDE743F}"
+	ProjectSection(SolutionItems) = preProject
+		Gui\ToolsCharacterForm\bin\Debug\Output\COMMANDANT_ARGOSSIAN.json = Gui\ToolsCharacterForm\bin\Debug\Output\COMMANDANT_ARGOSSIAN.json
+		Gui\ToolsCharacterForm\bin\Debug\Output\EMILIO_GRANDERS.json = Gui\ToolsCharacterForm\bin\Debug\Output\EMILIO_GRANDERS.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

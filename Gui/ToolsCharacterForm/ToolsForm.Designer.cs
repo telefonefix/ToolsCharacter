@@ -39,7 +39,7 @@
             // 
             // btn_Serial
             // 
-            this.btn_Serial.Location = new System.Drawing.Point(490, 465);
+            this.btn_Serial.Location = new System.Drawing.Point(490, 569);
             this.btn_Serial.Name = "btn_Serial";
             this.btn_Serial.Size = new System.Drawing.Size(106, 24);
             this.btn_Serial.TabIndex = 3;
@@ -49,7 +49,7 @@
             // 
             // btn_ToDB
             // 
-            this.btn_ToDB.Location = new System.Drawing.Point(602, 465);
+            this.btn_ToDB.Location = new System.Drawing.Point(602, 569);
             this.btn_ToDB.Name = "btn_ToDB";
             this.btn_ToDB.Size = new System.Drawing.Size(106, 24);
             this.btn_ToDB.TabIndex = 4;
@@ -60,7 +60,7 @@
             // btn_Clear
             // 
             this.btn_Clear.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Clear.Location = new System.Drawing.Point(826, 465);
+            this.btn_Clear.Location = new System.Drawing.Point(826, 569);
             this.btn_Clear.Name = "btn_Clear";
             this.btn_Clear.Size = new System.Drawing.Size(106, 24);
             this.btn_Clear.TabIndex = 5;
@@ -73,12 +73,12 @@
             this.txtBox_Appt.Location = new System.Drawing.Point(12, 36);
             this.txtBox_Appt.Multiline = true;
             this.txtBox_Appt.Name = "txtBox_Appt";
-            this.txtBox_Appt.Size = new System.Drawing.Size(920, 423);
+            this.txtBox_Appt.Size = new System.Drawing.Size(920, 527);
             this.txtBox_Appt.TabIndex = 2;
             // 
             // btn_Example
             // 
-            this.btn_Example.Location = new System.Drawing.Point(12, 465);
+            this.btn_Example.Location = new System.Drawing.Point(12, 569);
             this.btn_Example.Name = "btn_Example";
             this.btn_Example.Size = new System.Drawing.Size(106, 24);
             this.btn_Example.TabIndex = 6;
@@ -97,7 +97,7 @@
             // 
             // btnChangeGender
             // 
-            this.btnChangeGender.Location = new System.Drawing.Point(714, 465);
+            this.btnChangeGender.Location = new System.Drawing.Point(714, 569);
             this.btnChangeGender.Name = "btnChangeGender";
             this.btnChangeGender.Size = new System.Drawing.Size(106, 24);
             this.btnChangeGender.TabIndex = 3;
@@ -112,7 +112,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Clear;
-            this.ClientSize = new System.Drawing.Size(944, 501);
+            this.ClientSize = new System.Drawing.Size(944, 605);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_Example);
             this.Controls.Add(this.btnChangeGender);
@@ -120,6 +120,7 @@
             this.Controls.Add(this.btn_ToDB);
             this.Controls.Add(this.btn_Clear);
             this.Controls.Add(this.txtBox_Appt);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ToolsForm";

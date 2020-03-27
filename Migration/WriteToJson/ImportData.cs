@@ -117,11 +117,18 @@ namespace WriteToJson
             
             _factory.CreateCharacter(_characterize, gender);
             
-            _fileName = _factory.FirstName + "_" + _factory.Name+"_";
+            _fileName = _factory.FirstName + "_" + _factory.Name;
             _json = JsonConvert.SerializeObject(_factory, Formatting.Indented);
             File.WriteAllText(string.Format(@".\Output\{0}.json", _fileName), _json);
 
+            if (Directory.Exists(@".\Output\"))
+            {
+                Directory.CreateDirectory(@".\Output\");
+            }
+
             Success = _factory.Success;
+
+
 
             if (Success && File.Exists(string.Format(@".\Output\{0}.json", _fileName)))
             {
