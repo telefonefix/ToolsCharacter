@@ -1,5 +1,6 @@
 ﻿using Data.Entities.Characterize;
 using Data.Entities.Corporation;
+using Data.Entities.Patent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,11 @@ namespace Data.Entities.Person
     public class Character : ICharacter
     {
         #region Attributs
-        private IRepository<Features> _feature;
-        private IRepository<Skills> _skill;
-        private IRepository<SpecialAbilities> _special;
-
+        private ICharacteristic<Feature> _feature;
+        private ICharacteristic<Skill> _skill;
+        private ICharacteristic<SpecialAbility> _special;
+        private IPatent _patent;
+        private IEthnie _ethnie;
         private ICorporation _corporation;
         #endregion
 
@@ -29,29 +31,29 @@ namespace Data.Entities.Person
         public string LastName { get; set; }
         public string Pseudo { get; set; }
         public Gender Gender { get; set; }
-        public Features[] Features { get; set; }
-        public List<Skills> Skills { get; set; }
-        public List<SpecialAbilities> SpecialAbilities { get; set; }
-        public List<Ressources> Resources { get; set; }
-        public List<Patents> Patents { get; set; }
+        public IEthnie Ethnie { get; set; }
+
+        public Feature[] Features { get; set; }
+        public List<Skill> Skills { get; set; }
+        public List<SpecialAbility> SpecialAbilities { get; set; }
+        public List<Resource> Resources { get; set; }
+        public List<IPatent> Patents { get; set; }
+        public int Chance { get; set; }
 
         public ICorporation Corpo { get; set; }
+        public bool Alive { get; set; }
 
-        public int Chance { get; set; }
-        public string Noun { get; set; }
         #endregion
 
         #region Constructor
         public Character(
-            IRepository<Features> feature,
-            IRepository<Skills> skill,
-            IRepository<SpecialAbilities> special,
-            ICorporation corporation)
+            ICharacteristic<Feature> feature,
+            ICharacteristic<Skill> skill,            
+            IEthnie ethnie)
         {
             this._feature = feature ?? throw new ArgumentNullException(nameof(feature));
-            this._skill = skill ?? throw new ArgumentNullException(nameof(skill));
-            this._special = special ?? throw new ArgumentNullException(nameof(special));
-            this._corporation = corporation ?? throw new ArgumentNullException(nameof(corporation));
+            this._skill = skill ?? throw new ArgumentNullException(nameof(skill));            
+            this._ethnie = ethnie ?? throw new ArgumentNullException(nameof(ethnie));                        
         }
         #endregion
     }

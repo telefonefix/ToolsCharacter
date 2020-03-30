@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities.Characterize
 {
-    public class Features : IRepository<Features>
+    public class Feature : ICharacteristic<Feature>
     {
         public string Name { get; set; }
         public int Value { get; set; }

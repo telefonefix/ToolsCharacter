@@ -12,13 +12,17 @@ namespace Data.Entities.Person
 
         string LastName { get; set; }
 
-        string Noun { get; set; }
+        Gender Gender { get; set; }
 
-        Features[] Features { get; set; }
+        bool Alive { get; set; }
 
-        List<Skills> Skills { get; set; }
+        IEthnie Ethnie { get; set; }
 
-        List<SpecialAbilities> SpecialAbilities { get; set; }
+        Feature[] Features { get; set; }
+
+        List<Skill> Skills { get; set; }
+
+        List<SpecialAbility> SpecialAbilities { get; set; }
 
         ICorporation Corpo { get; set; }
     }

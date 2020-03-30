@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Data.Entities.Characterize;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.Entities.Characterize
+namespace Data.Entities.Patent
 {
-    public interface IPatents
+    public interface IPatent
     {
         int Id { get; }
 
@@ -16,8 +17,8 @@ namespace Data.Entities.Characterize
 
         string Description { get; set; }
 
-        Dictionary<Features, int> Features { get; set; }
+        Dictionary<Feature, int> Features { get; set; }
 
-        Dictionary<Skills, int> Skills { get; set; }
+        Dictionary<Skill, int> Skills { get; set; }
     }
 }

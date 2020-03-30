@@ -7,6 +7,13 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="5.1.2" />
+    <PackageReference Include="EntityFramework" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data.Character\Data.Entities\Data.Entities.csproj" />
+    <ProjectReference Include="..\..\Data.Character\Data.Factories\Data.Factories.csproj" />
+    <ProjectReference Include="..\..\Data.Context\Data.Context.csproj" />
   </ItemGroup>
 
 </Project>

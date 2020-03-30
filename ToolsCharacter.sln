@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Json.Output", "Json.Output"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Context", "Data.Context\Data.Context.csproj", "{61225CEB-98B4-4E74-BE11-FC1A576080EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Repositories", "Data.Repositories\Data.Repositories.csproj", "{F18209DC-265B-48CB-A64C-798E60863C7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{61225CEB-98B4-4E74-BE11-FC1A576080EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61225CEB-98B4-4E74-BE11-FC1A576080EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61225CEB-98B4-4E74-BE11-FC1A576080EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F18209DC-265B-48CB-A64C-798E60863C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F18209DC-265B-48CB-A64C-798E60863C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F18209DC-265B-48CB-A64C-798E60863C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F18209DC-265B-48CB-A64C-798E60863C7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{9730B033-6C3F-4A65-896E-20AE0C9B5134} = {5AAE83AF-A2EC-4CD1-A316-FF7545253095}
 		{3501BAA5-9080-437F-8336-96C488F8B421} = {46777701-C7C8-4071-B5C6-AF1980390140}
 		{61225CEB-98B4-4E74-BE11-FC1A576080EE} = {F4D6FC39-0121-4E82-B873-93E7BF1D1597}
+		{F18209DC-265B-48CB-A64C-798E60863C7C} = {F4D6FC39-0121-4E82-B873-93E7BF1D1597}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0F5D5DDF-1194-4E6B-9C88-343D79CB9D02}

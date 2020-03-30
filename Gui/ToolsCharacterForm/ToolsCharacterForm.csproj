@@ -124,6 +124,10 @@
       <Project>{61225CEB-98B4-4E74-BE11-FC1A576080EE}</Project>
       <Name>Data.Context</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Migration\ExportToDB\ExportToDB.csproj">
+      <Project>{1ACC24E4-15BB-47B8-A440-EF777BF9068B}</Project>
+      <Name>ExportToDB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Migration\WriteToJson\WriteToJson.csproj">
       <Project>{A7D2092B-3F6A-4CAF-91A7-AD2DAFDAF276}</Project>
       <Name>WriteToJson</Name>

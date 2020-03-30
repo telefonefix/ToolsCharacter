@@ -15,7 +15,7 @@
         Techi
     }
 
-    public class SpecialAbilities : IRepository<SpecialAbilities>
+    public class SpecialAbility : ICharacteristic<SpecialAbility>
     {
         public string Name { get; set; }
         public int Value { get; set; }

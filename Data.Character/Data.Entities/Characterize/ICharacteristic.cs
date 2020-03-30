@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities.Characterize
 {
-    public interface IRepository<T>
+    public interface ICharacteristic<T>
     {
         int Id { get; set; }
 

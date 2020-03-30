@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Data.Entities.Characterize;
 using Data.Entities.Corporation;
+using Data.Entities.Patent;
 using Data.Entities.Person;
 using System;
 using System.Collections.Generic;
@@ -36,11 +37,11 @@ namespace Data.Factories
         public string Pseudo { get; set; }
         public string Noun { get; set; }
         //public IDictionary<string, int> Features { get; set; }
-        public Features[] Features { get; set; }
-        public List<Skills> Skills { get; set; }
-        public List<SpecialAbilities> SpecialAbilities { get; set; }
-        public List<Ressources> Ressources { get; set; }
-        public List<Patents> Patents { get; set; }
+        public Feature[] Features { get; set; }
+        public List<Skill> Skills { get; set; }
+        public List<SpecialAbility> SpecialAbilities { get; set; }
+        public List<Resource> Ressources { get; set; }
+        public List<Patent> Patents { get; set; }
         public ICorporation Corporation { get; set; }
 
         public bool Success { get; set; }
@@ -52,7 +53,6 @@ namespace Data.Factories
             BuildDependency();
         }
         #endregion
-
         #region Public Methods
         public void CreateCharacter(List<string> characterize, string gender)
         {
@@ -78,23 +78,21 @@ namespace Data.Factories
             }
             return list;
         }
-
         #endregion
-
-        #region Public Methods
+        #region Private Methods
 
         private void BuildDependency()
         {
             var builder = new ContainerBuilder();
 
             builder.RegisterType<Character>().As<ICharacter>();
-            builder.RegisterType<Skills>().As<IRepository<Skills>>();
-            builder.RegisterType<Features>().As<IRepository<Features>>();
-            builder.RegisterType<SpecialAbilities>().As<IRepository<SpecialAbilities>>();
-            builder.RegisterType<Ressources>().As<IRepository<Ressources>>();
+            builder.RegisterType<Skill>().As<ICharacteristic<Skill>>();
+            builder.RegisterType<Feature>().As<ICharacteristic<Feature>>();
+            builder.RegisterType<SpecialAbility>().As<ICharacteristic<SpecialAbility>>();
+            builder.RegisterType<Resource>().As<ICharacteristic<Resource>>();
             builder.RegisterType<Corporation>().As<ICorporation>();
             builder.RegisterType<Grade>().As<IGrade>();
-            builder.RegisterType<Patents>().As<IPatents>();
+            builder.RegisterType<Patent>().As<IPatent>();
 
             _container = builder.Build();
         }
@@ -102,11 +100,11 @@ namespace Data.Factories
         {
             _dico = new Dictionary<string, int>();
             _features = GetEnumList(new FeaturesList());
-            Features = new Features[_features.Count];
-            SpecialAbilities = new List<SpecialAbilities>();
-            Skills = new List<Skills>();
-            Ressources = new List<Ressources>();
-            Patents = new List<Patents>();
+            Features = new Feature[_features.Count];
+            SpecialAbilities = new List<SpecialAbility>();
+            Skills = new List<Skill>();
+            Ressources = new List<Resource>();
+            Patents = new List<Patent>();
 
             _dicGender = new Dictionary<Gender, string>()
             {
@@ -117,11 +115,11 @@ namespace Data.Factories
 
             _dictionnaryStandards = new Dictionary<Type, string>()
             {
-                {typeof(Features),"caracteristiques" },
-                {typeof(Skills),"competences" },
-                {typeof(SpecialAbilities),"capacites_speciales" },
-                {typeof(Ressources),"ressources" },
-                {typeof(Patents),"brevets" }
+                {typeof(Feature),"caracteristiques" },
+                {typeof(Skill),"competences" },
+                {typeof(SpecialAbility),"capacites_speciales" },
+                {typeof(Resource),"ressources" },
+                {typeof(Patent),"brevets" }
             };
             _fields = GetEnumList(new FieldsList());
         }
@@ -147,10 +145,10 @@ namespace Data.Factories
                 SetName(_characterize[0].Split('('), Gender.Male);
             }
 
-            SetCharacterize(new Features());
-            SetCharacterize(new SpecialAbilities());
-            SetCharacterize(new Skills());
-            SetCharacterize(new Ressources());
+            SetCharacterize(new Feature());
+            SetCharacterize(new SpecialAbility());
+            SetCharacterize(new Skill());
+            SetCharacterize(new Resource());
             ExtractPatents();
         }
         private void SetName(string[] line, Gender gender)
@@ -188,10 +186,10 @@ namespace Data.Factories
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <param name="dico"></param>
-        private bool SetCharacterize<T>(T t) where T : IRepository<T>
+        private bool SetCharacterize<T>(T t) where T : ICharacteristic<T>
         {
             List<string> items = new List<string>();
-            List<Features> features = new List<Features>();
+            List<Feature> features = new List<Feature>();
             Dictionary<string, int> dico = new Dictionary<string, int>();
 
             bool switchToArray = false;
@@ -199,7 +197,7 @@ namespace Data.Factories
             string message = string.Concat("Il manque les caractéristiques suivantes :", Environment.NewLine);
             _missed = new List<string>();
 
-            if (t.GetType() == typeof(Features))
+            if (t.GetType() == typeof(Feature))
             {
                 _missed.Add(string.Concat("Il manque les caractéristiques suivantes :", Environment.NewLine));
                 message = string.Concat("Il manque les caractéristiques suivantes :", Environment.NewLine);
@@ -213,8 +211,8 @@ namespace Data.Factories
             {
                 switch (t)
                 {
-                    case Features f:
-                        f = new Features
+                    case Feature f:
+                        f = new Feature
                         {
                             Id = i,
                             Name = item.Key,
@@ -223,8 +221,8 @@ namespace Data.Factories
                         features.Add(f);
                         switchToArray = true;
                         break;
-                    case Skills s:
-                        s = new Skills
+                    case Skill s:
+                        s = new Skill
                         {
                             Id = i,
                             Name = item.Key,
@@ -232,8 +230,8 @@ namespace Data.Factories
                         };
                         Skills.Add(s);
                         break;
-                    case SpecialAbilities sa:
-                        sa = new SpecialAbilities
+                    case SpecialAbility sa:
+                        sa = new SpecialAbility
                         {
                             Id = i,
                             Name = item.Key,
@@ -241,8 +239,8 @@ namespace Data.Factories
                         };
                         SpecialAbilities.Add(sa);
                         break;
-                    case Ressources r:
-                        r = new Ressources
+                    case Resource r:
+                        r = new Resource
                         {
                             Id = i,
                             Name = item.Key,
@@ -269,14 +267,14 @@ namespace Data.Factories
         {
             string patents = string.Empty;
 
-            if (!ExtractDatas(new Patents(), ref patents))
+            if (!ExtractDatas(new Patent(), ref patents))
             {
                 return;
             }
 
             foreach (string p in patents.Split('|').ToList())
             {
-                Patents patent = new Patents()
+                Patent patent = new Patent()
                 {
                     Name = p
                     // Voir pour les caracteristiques des brevets
@@ -301,7 +299,7 @@ namespace Data.Factories
             List<string> characterize = Standardize(t, Regex.Replace(lineCharacterize, @"\s+", " ").Split('|').ToList());
 
             // Dans le cas Features toutes les valeurs sont requises
-            if (t.GetType() == typeof(Features))
+            if (t.GetType() == typeof(Feature))
             {
                 return CheckFeatures(characterize, ref dico);
             }
@@ -497,7 +495,7 @@ namespace Data.Factories
             bool isMatch = false;
             string requiredField = string.Empty;
 
-            if (t.GetType() != typeof(Patents))
+            if (t.GetType() != typeof(Patent))
             {
                 Regex match = new Regex(_dictionnaryStandards[t.GetType()], RegexOptions.IgnoreCase);
 
@@ -523,17 +521,17 @@ namespace Data.Factories
                 }
                 switch (t)
                 {
-                    case Features f:
+                    case Feature f:
                         requiredField = "Caracteristique";
                         break;
-                    case Skills s:
+                    case Skill s:
                         requiredField = "Competences";
                         break;
                     default:
                         requiredField = "Champ optionnel";
                         break;
                 }
-                if (string.IsNullOrEmpty(datas) && (t.GetType() != typeof(Ressources) || t.GetType() != typeof(SpecialAbilities)))
+                if (string.IsNullOrEmpty(datas) && (t.GetType() != typeof(Resource) || t.GetType() != typeof(SpecialAbility)))
                 {
                     _missed.Add(string.Concat(string.Format("Aucune {0} n'a été renseigné", requiredField),
                                      Environment.NewLine,
@@ -545,7 +543,7 @@ namespace Data.Factories
             }
 
             // Concerne les brevets ou la cyber (Ceci est optionnel) donc si ce champ est vide non retour d'erreur
-            int index = _characterize.FindIndex(c => c == _dictionnaryStandards[typeof(Patents)]);
+            int index = _characterize.FindIndex(c => c == _dictionnaryStandards[typeof(Patent)]);
 
             if (index > 0)
             {
@@ -582,13 +580,20 @@ namespace Data.Factories
         private string FormatStandard(string input)
         {
             List<string> typeGrade = new List<string>()
-            { " o ", " oo", "^", "^^", "*", "**" };
+            {
+                " o ",
+                " oo",
+                "^",
+                "^^",
+                "*",
+                "**"
+            };
             string output = input;
             // TODO : Getion du grade (cas particulier le rond) à ne pas confondre avec le o ou O
             // o G500   => grade
             // ooo IMF  => grade
             // freelance, agent immobilier => pas grade
-            // *** Waterloo => grade
+            // *** Waterloo => grade = ***
 
 
             if (!typeGrade.Any(output.ToLower().Contains))
@@ -655,6 +660,14 @@ namespace Data.Factories
 
             return true;
         }
+
+
+
+        private void CreateEmployee()
+        {
+
+        }
+
         private void CreateEmployee(string[] employee)
         {
             string name = employee[1].ToUpper().Trim();
@@ -696,7 +709,7 @@ namespace Data.Factories
         private string SetRank(Category category, int qty)
         {
             char r;
-            char[] rk = { '\u25CB', '\u0394', '\u2605' };
+            char[] rk = { '\u25CF', '\u25BC', '\u2605' };
             switch (category)
             {
                 case Category.Circle:
@@ -717,7 +730,5 @@ namespace Data.Factories
         }
 
         #endregion
-
-
     }
 }

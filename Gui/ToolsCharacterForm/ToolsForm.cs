@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExportToDB;
+using System;
 using System.Windows.Forms;
 using WriteToJson;
 
@@ -97,9 +98,15 @@ namespace ToolsCharacterForm
 
         private void Btn_ToDB_Click(object sender, EventArgs e)
         {
-           
+            ExportToDB();
         }
 
+
+        private void ExportToDB()
+        {
+            ExportDatasToDB exportDatasToDB = new ExportDatasToDB();
+            exportDatasToDB.SetToDb(_gender);
+        }
         private void Btn_Clear_Click(object sender, EventArgs e)
         {
             _genderValidated = false;
