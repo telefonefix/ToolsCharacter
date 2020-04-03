@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class SpecialAbilityRepository : IRepository<ICharacteristic<SpecialAbility>>
+    public class SpecialAbilityRepository : ICharacteristic<SpecialAbility>
     {
+        public int Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Value { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public void Create()
         {
             throw new NotImplementedException();

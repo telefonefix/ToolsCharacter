@@ -7,7 +7,7 @@ namespace Data.Entities.Person
 
     public interface ICharacter
     {
-
+        int Id { get; set; }
         string FirstName { get; set; }
 
         string LastName { get; set; }
@@ -16,15 +16,15 @@ namespace Data.Entities.Person
 
         bool Alive { get; set; }
 
-        IEthnie Ethnie { get; set; }
-
-        Feature[] Features { get; set; }
+        ICollection<Feature> Features { get; set; }
 
         List<Skill> Skills { get; set; }
 
         List<SpecialAbility> SpecialAbilities { get; set; }
 
         ICorporation Corpo { get; set; }
+
+        Ethnic Ethnic { get; set; }
     }
 
 }

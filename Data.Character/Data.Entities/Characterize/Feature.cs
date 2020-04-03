@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Data.Entities.Person;
 
 namespace Data.Entities.Characterize
 {
+    [Table("Features")]
     public class Feature : ICharacteristic<Feature>
     {
-        public string Name { get; set; }
-        public int Value { get; set; }
+        [Key]
         public int Id { get; set; }
+        public string Name { get; set; }
+
+
+        public int Value { get; set; }
+        public ICollection<Character> Characters { get; set; }
     }
 
     public enum FeaturesList
@@ -21,5 +27,5 @@ namespace Data.Entities.Characterize
         TECH = 5,
         INT = 6,
         REF = 7
-    }   
+    }
 }

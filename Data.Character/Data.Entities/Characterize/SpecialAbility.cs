@@ -1,20 +1,5 @@
 ﻿namespace Data.Entities.Characterize
 {
-
-    public enum SpecialAbilitiesList
-    {
-        Sens_du_combat,
-        Furtif,        
-        Interface,
-        Autorite,
-        Charisme,
-        Persuaders,
-        Fixer,
-        Techmed,
-        Media,
-        Techi
-    }
-
     public class SpecialAbility : ICharacteristic<SpecialAbility>
     {
         public string Name { get; set; }

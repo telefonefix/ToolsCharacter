@@ -8,16 +8,26 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class PatentRepository : IRepository<Patent>
+    public class PatentRepository 
     {
-        public void Create()
-        {
-            throw new NotImplementedException();
-        }
+        //public void Create()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void Update()
-        {
-            throw new NotImplementedException();
-        }
+        //public void Update()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //void IPatent<Patent>.Create<TEntity>(TEntity t, string name)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //void IPatent<Patent>.Update()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -3,6 +3,7 @@ using Data.Entities.Characterize;
 using Data.Entities.Corporation;
 using Data.Entities.Patent;
 using Data.Entities.Person;
+using Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,7 +91,7 @@ namespace Data.Factories
             builder.RegisterType<Feature>().As<ICharacteristic<Feature>>();
             builder.RegisterType<SpecialAbility>().As<ICharacteristic<SpecialAbility>>();
             builder.RegisterType<Resource>().As<ICharacteristic<Resource>>();
-            builder.RegisterType<Corporation>().As<ICorporation>();
+            builder.RegisterType<CorporationRepository>().As<ICorporationRepository>();
             builder.RegisterType<Grade>().As<IGrade>();
             builder.RegisterType<Patent>().As<IPatent>();
 
@@ -186,7 +187,7 @@ namespace Data.Factories
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <param name="dico"></param>
-        private bool SetCharacterize<T>(T t) where T : ICharacteristic<T>
+        private bool SetCharacterize<TEntity>(TEntity t) where TEntity : class, ICharacteristic<TEntity>
         {
             List<string> items = new List<string>();
             List<Feature> features = new List<Feature>();
@@ -212,6 +213,14 @@ namespace Data.Factories
                 switch (t)
                 {
                     case Feature f:
+
+                        FeatureRepository repository = new FeatureRepository(new DbRepository<Feature>());
+
+                        //repository.Create(f,item.Key);
+                        //ICharacteristic<Feature> characteristic = new Feature();
+                        repository.Create<ICharacteristic<Feature>>(f, new Feature(), item.Key);
+
+
                         f = new Feature
                         {
                             Id = i,
@@ -665,7 +674,7 @@ namespace Data.Factories
 
         private void CreateEmployee()
         {
-
+            //CorporationRepository repository = ne
         }
 
         private void CreateEmployee(string[] employee)

@@ -52,6 +52,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharactereContext.cs" />
+    <Compile Include="Migrations\202003311343127_1.cs" />
+    <Compile Include="Migrations\202003311343127_1.designer.cs">
+      <DependentUpon>202003311343127_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004010813560_2.cs" />
+    <Compile Include="Migrations\202004010813560_2.designer.cs">
+      <DependentUpon>202004010813560_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004011805333_3.cs" />
+    <Compile Include="Migrations\202004011805333_3.designer.cs">
+      <DependentUpon>202004011805333_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004031549263_4.cs" />
+    <Compile Include="Migrations\202004031549263_4.designer.cs">
+      <DependentUpon>202004031549263_4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +80,20 @@
       <Project>{EADEF0E4-B76A-48B1-9972-A937B495601E}</Project>
       <Name>Data.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003311343127_1.resx">
+      <DependentUpon>202003311343127_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004010813560_2.resx">
+      <DependentUpon>202004010813560_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004011805333_3.resx">
+      <DependentUpon>202004011805333_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004031549263_4.resx">
+      <DependentUpon>202004031549263_4.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -13,6 +13,7 @@ namespace Data.Entities.Corporation
 
     public interface IGrade
     {
+        int Id { get; set; }
         Category Category { get; set; }
 
         int Qty { get; set; }
