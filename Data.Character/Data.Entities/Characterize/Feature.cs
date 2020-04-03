@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Data.Entities.Attribute;
 using Data.Entities.Person;
 
 namespace Data.Entities.Characterize
@@ -14,7 +15,11 @@ namespace Data.Entities.Characterize
 
 
         public int Value { get; set; }
-        public ICollection<Character> Characters { get; set; }
+        //public ICollection<Character> Characters { get; set; }
+
+        public ICollection<AttributeFeature> AttributeFeatures { get; set; }
+
+
     }
 
     public enum FeaturesList

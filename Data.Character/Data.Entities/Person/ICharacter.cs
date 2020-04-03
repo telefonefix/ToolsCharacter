@@ -1,4 +1,5 @@
-﻿using Data.Entities.Characterize;
+﻿using Data.Entities.Attribute;
+using Data.Entities.Characterize;
 using Data.Entities.Corporation;
 using System.Collections.Generic;
 
@@ -16,7 +17,7 @@ namespace Data.Entities.Person
 
         bool Alive { get; set; }
 
-        ICollection<Feature> Features { get; set; }
+        ICollection<AttributeFeature> AttributeFeatures { get; set; }
 
         List<Skill> Skills { get; set; }
 

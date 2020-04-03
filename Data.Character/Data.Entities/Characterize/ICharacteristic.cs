@@ -11,6 +11,8 @@ namespace Data.Entities.Characterize
         string Name { get; set; }
         int Value { get; set; }
 
-        ICollection<Character> Characters { get; set; }
+        //ICollection<Character> Characters { get; set; }
+
+
     }
 }

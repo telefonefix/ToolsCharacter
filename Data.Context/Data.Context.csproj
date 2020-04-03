@@ -68,6 +68,18 @@
     <Compile Include="Migrations\202004031549263_4.designer.cs">
       <DependentUpon>202004031549263_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004031629042_5.cs" />
+    <Compile Include="Migrations\202004031629042_5.designer.cs">
+      <DependentUpon>202004031629042_5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004031631434_6.cs" />
+    <Compile Include="Migrations\202004031631434_6.designer.cs">
+      <DependentUpon>202004031631434_6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004031642246_7.cs" />
+    <Compile Include="Migrations\202004031642246_7.designer.cs">
+      <DependentUpon>202004031642246_7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +105,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004031549263_4.resx">
       <DependentUpon>202004031549263_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004031629042_5.resx">
+      <DependentUpon>202004031629042_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004031631434_6.resx">
+      <DependentUpon>202004031631434_6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004031642246_7.resx">
+      <DependentUpon>202004031642246_7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

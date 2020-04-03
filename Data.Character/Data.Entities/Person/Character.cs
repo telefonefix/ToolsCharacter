@@ -1,4 +1,5 @@
-﻿using Data.Entities.Characterize;
+﻿using Data.Entities.Attribute;
+using Data.Entities.Characterize;
 using Data.Entities.Corporation;
 using Data.Entities.Patent;
 using System;
@@ -42,7 +43,8 @@ namespace Data.Entities.Person
 
         public ICorporation Corpo { get; set; }
         public bool Alive { get; set; }
-        public virtual ICollection<Feature> Features { get; set; }
+        //public virtual ICollection<Feature> Features { get; set; }
+        public ICollection<AttributeFeature> AttributeFeatures { get; set; }
 
         #endregion
 
