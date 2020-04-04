@@ -4,7 +4,7 @@ namespace Data.Entities.Person
 {
     public interface IEthnic
     {
-        int IdEthnie { get; set; }
+        int IdEthnic { get; set; }
 
         string Name { get; set; }
 

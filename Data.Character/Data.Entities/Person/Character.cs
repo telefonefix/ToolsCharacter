@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entities.Person
 {
-    public enum Gender
+    public enum EnumGender
     {
         Male,
         Female,
@@ -33,8 +33,9 @@ namespace Data.Entities.Person
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Pseudo { get; set; }
-        public Gender Gender { get; set; }
-        public virtual Ethnic Ethnic { get; set; }        
+        public EnumGender Gender { get; set; }
+        public int IdEthnic { get; set; }
+        public virtual Ethnic Ethnic { get; set; }
         public List<Skill> Skills { get; set; }
         public List<SpecialAbility> SpecialAbilities { get; set; }
         public List<Resource> Resources { get; set; }
@@ -52,11 +53,20 @@ namespace Data.Entities.Person
         public Character(
             ICharacteristic<Feature> feature,
             ICharacteristic<Skill> skill,
+            ICorporation corporation,
             IEthnic ethnic)
         {
-            this._feature = feature ?? throw new ArgumentNullException(nameof(feature));
-            this._skill = skill ?? throw new ArgumentNullException(nameof(skill));
-            this._ethnie = ethnic ?? throw new ArgumentNullException(nameof(ethnic));
+            _feature = feature ?? throw new ArgumentNullException(nameof(feature));
+            _skill = skill ?? throw new ArgumentNullException(nameof(skill));
+            _ethnie = ethnic ?? throw new ArgumentNullException(nameof(ethnic));
+            _corporation = corporation ?? throw new ArgumentNullException(nameof(corporation));
+        }
+
+        public Character()
+        {
+            _feature = new Feature();
+            _skill = new Skill();
+            _ethnie = new Ethnic();
         }
         #endregion
     }

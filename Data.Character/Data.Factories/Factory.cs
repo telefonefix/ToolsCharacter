@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Data.Factories
 {
-    public enum FieldsList
+    public enum EnumFields
     {
         caracteristiques,
         capacites_speciales,
@@ -25,7 +25,7 @@ namespace Data.Factories
         #region Attributs
         private IContainer _container;
         private List<string> _features;
-        private Dictionary<Gender, string> _dicGender;
+        private Dictionary<EnumGender, string> _dicGender;
         private Dictionary<Type, string> _dictionnaryStandards;
         private Dictionary<string, int> _dico;
         private List<string> _missed;
@@ -91,7 +91,7 @@ namespace Data.Factories
             builder.RegisterType<Feature>().As<ICharacteristic<Feature>>();
             builder.RegisterType<SpecialAbility>().As<ICharacteristic<SpecialAbility>>();
             builder.RegisterType<Resource>().As<ICharacteristic<Resource>>();
-            builder.RegisterType<CorporationRepository>().As<ICorporationRepository>();
+            builder.RegisterType<Corporation>().As<ICorporation>();
             builder.RegisterType<Grade>().As<IGrade>();
             builder.RegisterType<Patent>().As<IPatent>();
 
@@ -100,18 +100,18 @@ namespace Data.Factories
         private void Init()
         {
             _dico = new Dictionary<string, int>();
-            _features = GetEnumList(new FeaturesList());
+            _features = GetEnumList(new EnumFeatures());
             Features = new Feature[_features.Count];
             SpecialAbilities = new List<SpecialAbility>();
             Skills = new List<Skill>();
             Ressources = new List<Resource>();
             Patents = new List<Patent>();
 
-            _dicGender = new Dictionary<Gender, string>()
+            _dicGender = new Dictionary<EnumGender, string>()
             {
-                {Gender.Male,"Mr"},
-                {Gender.Female,"Mrs"},
-                {Gender.CyberRobot,"Cyb"}
+                {EnumGender.Male,"Mr"},
+                {EnumGender.Female,"Mrs"},
+                {EnumGender.CyberRobot,"Cyb"}
             };
 
             _dictionnaryStandards = new Dictionary<Type, string>()
@@ -122,18 +122,18 @@ namespace Data.Factories
                 {typeof(Resource),"ressources" },
                 {typeof(Patent),"brevets" }
             };
-            _fields = GetEnumList(new FieldsList());
+            _fields = GetEnumList(new EnumFields());
         }
         private void SetCharacter(string gender)
         {
-            Dictionary<string, Gender> dicGender = new Dictionary<string, Gender>()
+            Dictionary<string, EnumGender> dicGender = new Dictionary<string, EnumGender>()
             {
-                {"Homme",Gender.Male },
-                {"Femme",Gender.Female },
-                {"Cyber Robot",Gender.CyberRobot }
+                {"Homme",EnumGender.Male },
+                {"Femme",EnumGender.Female },
+                {"Cyber Robot",EnumGender.CyberRobot }
             };
 
-            Gender genderEnum = Gender.Male;
+            EnumGender genderEnum = EnumGender.Male;
             dicGender.TryGetValue(gender, out genderEnum);
             Noun = gender;
 
@@ -143,7 +143,7 @@ namespace Data.Factories
             }
             catch (Exception)
             {
-                SetName(_characterize[0].Split('('), Gender.Male);
+                SetName(_characterize[0].Split('('), EnumGender.Male);
             }
 
             SetCharacterize(new Feature());
@@ -152,7 +152,7 @@ namespace Data.Factories
             SetCharacterize(new Resource());
             ExtractPatents();
         }
-        private void SetName(string[] line, Gender gender)
+        private void SetName(string[] line, EnumGender gender)
         {
             string[] temp = line[0].Split(' ');
             List<string> names = new List<string>();
@@ -176,6 +176,11 @@ namespace Data.Factories
 
                 names[2] = other;
             }
+
+            // TODO : Faire Repository pour la création de personnage
+
+            CharacterRepository repository = new CharacterRepository();
+            repository.Create(names[0], names[1], names[2],gender);
 
             FirstName = names[0];
             Name = names[1];
@@ -214,7 +219,7 @@ namespace Data.Factories
                 {
                     case Feature f:
 
-                        FeatureRepository repository = new FeatureRepository(new DbRepository<Feature>());
+                        FeatureRepository repository = new FeatureRepository(new DbCharacterizeRepository<Feature>());
 
                         //repository.Create(f,item.Key);
                         //ICharacteristic<Feature> characteristic = new Feature();
@@ -682,25 +687,25 @@ namespace Data.Factories
             string name = employee[1].ToUpper().Trim();
             string stGrade = employee[0].ToLower().Trim();
             int qty = stGrade.Length;
-            Category category;
+            EnumCategory category;
 
             switch (stGrade.Substring(0, 1))
             {
                 case "o":
-                    category = Category.Circle;
+                    category = EnumCategory.Circle;
                     break;
                 case "^":
-                    category = Category.Triangle;
+                    category = EnumCategory.Triangle;
                     break;
                 case "*":
-                    category = Category.Star;
+                    category = EnumCategory.Star;
                     break;
                 default:
-                    category = Category.Circle;
+                    category = EnumCategory.Circle;
                     break;
             }
 
-            using (var scope = _container.BeginLifetimeScope())
+            using (ILifetimeScope scope = _container.BeginLifetimeScope())
             {
                 ICorporation corpo = scope.Resolve<ICorporation>();
                 IGrade grade = scope.Resolve<IGrade>();
@@ -715,19 +720,19 @@ namespace Data.Factories
                 Corporation = corpo;
             }
         }
-        private string SetRank(Category category, int qty)
+        private string SetRank(EnumCategory category, int qty)
         {
             char r;
             char[] rk = { '\u25CF', '\u25BC', '\u2605' };
             switch (category)
             {
-                case Category.Circle:
+                case EnumCategory.Circle:
                     r = rk[0];
                     break;
-                case Category.Triangle:
+                case EnumCategory.Triangle:
                     r = rk[1];
                     break;
-                case Category.Star:
+                case EnumCategory.Star:
                     r = rk[2];
                     break;
                 default:

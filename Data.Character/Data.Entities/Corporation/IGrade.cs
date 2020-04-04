@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities.Corporation
 {
-    public enum Category
+    public enum EnumCategory
     {
         Circle,
         Triangle,
@@ -14,7 +14,7 @@ namespace Data.Entities.Corporation
     public interface IGrade
     {
         int Id { get; set; }
-        Category Category { get; set; }
+        EnumCategory Category { get; set; }
 
         int Qty { get; set; }
         string Rank { get; set; }

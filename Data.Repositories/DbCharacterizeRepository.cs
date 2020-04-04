@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class DbRepository<T> : IDbRepository<T> where T : class, ICharacteristic<T>
+    public class DbCharacterizeRepository<T> : IDbCharacterizeRepository<T> where T : class, ICharacteristic<T>
     {
         protected CharactereContext _context;
 
@@ -69,13 +69,13 @@ namespace Data.Repositories
 
 
 
-        public DbRepository(CharactereContext context)
+        public DbCharacterizeRepository(CharactereContext context)
         {
             _context = context;
             _context.Configuration.LazyLoadingEnabled = false;
         }
 
-        public DbRepository()
+        public DbCharacterizeRepository()
         {
             _context = new CharactereContext();
             _context.Configuration.LazyLoadingEnabled = false;

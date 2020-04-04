@@ -10,7 +10,7 @@ namespace Data.Entities.Corporation
     {
         [Key]
         public int Id { get; set; }
-        public Category Category { get; set; }
+        public EnumCategory Category { get; set; }
 
         public int Qty { get; set; }
 

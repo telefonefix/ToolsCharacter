@@ -29,6 +29,12 @@ namespace Data.Context
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Character>()
+            .HasRequired<Ethnic>(s => s.Ethnic)
+            .WithMany(g => g.Characters)
+            .HasForeignKey<int>(s => s.IdEthnic);
+
+
             modelBuilder.Entity<AttributeFeature>().HasKey(q =>
             new {
                 q.IdCharactere,

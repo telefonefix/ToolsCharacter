@@ -10,7 +10,7 @@ namespace Data.Entities.Person
     public class Ethnic : IEthnic
     {
         [Key]
-        public int IdEthnie {get;set;}
+        public int IdEthnic {get;set;}
 
         public string Name { get; set; }
 
@@ -19,7 +19,7 @@ namespace Data.Entities.Person
 
     }
 
-    public enum EthnicList
+    public enum EnumEthnic
     {
         American_English,
         African,
@@ -32,4 +32,6 @@ namespace Data.Entities.Person
         South_American,
         European
     }
+
+   
 }

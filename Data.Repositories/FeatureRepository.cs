@@ -9,9 +9,9 @@ namespace Data.Repositories
 {
     public class FeatureRepository : ICharacterizeRepository<Feature>
     {
-        private DbRepository<Feature> _dbRepository;
+        private DbCharacterizeRepository<Feature> _dbRepository;
        
-        public FeatureRepository(DbRepository<Feature> dbRepository)
+        public FeatureRepository(DbCharacterizeRepository<Feature> dbRepository)
         {
             _dbRepository = dbRepository;
 

@@ -51,12 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbRepository.cs" />
+    <Compile Include="DbCharacterRepository.cs" />
+    <Compile Include="DbCharacterizeRepository.cs" />
     <Compile Include="FeatureRepository.cs" />
     <Compile Include="CorporationRepository.cs" />
     <Compile Include="ICharacterRepository.cs" />
     <Compile Include="ICorporationRepository.cs" />
-    <Compile Include="IDbRepository.cs" />
+    <Compile Include="IDbCharacterRepository.cs" />
+    <Compile Include="IDbCharacterizeRepository.cs" />
     <Compile Include="ICharacterizeRepository.cs" />
     <Compile Include="PatentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -22,7 +22,7 @@ namespace Data.Entities.Characterize
 
     }
 
-    public enum FeaturesList
+    public enum EnumFeatures
     {
         BT = 0,
         CON = 1,

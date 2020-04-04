@@ -40,7 +40,7 @@ namespace WriteToJson
         private void Init()
         {   
             _factory = new Factory();         
-            _fields = _factory.GetEnumList(new FieldsList());
+            _fields = _factory.GetEnumList(new EnumFields());
             Success = false;
         }
 

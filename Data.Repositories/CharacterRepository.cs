@@ -1,24 +1,34 @@
-﻿using Data.Entities.Characterize;
-using Data.Entities.Corporation;
-using Data.Entities.Person;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Data.Entities.Person;
 
 namespace Data.Repositories
 {
     public class CharacterRepository : ICharacterRepository
     {
-        void ICharacterRepository.Create(string firstName, string lastName, Gender gender)
+        private DbCharacterRepository _dbRepository;
+
+        public CharacterRepository()
         {
-            throw new NotImplementedException();
+            _dbRepository = new DbCharacterRepository();
         }
 
-        void ICharacterRepository.Update()
+        public CharacterRepository(DbCharacterRepository dbRepository)
         {
-            throw new NotImplementedException();
+            _dbRepository = dbRepository;
         }
+
+        public void Create(string firstName, string lastName, string pseudo, EnumGender gender)
+        {
+            // TODO : Voir plus tard pour IdEthnic
+            _dbRepository.Add(new Character()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Pseudo = pseudo,
+                Gender = gender,
+                IdEthnic = 1,
+                Alive = true
+            });
+        }
+        public void Update() { }
     }
 }

@@ -1,21 +1,19 @@
 ﻿using Data.Entities.Characterize;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public interface IDbRepository<T> : IDisposable where T : class,ICharacteristic<T>
+    public interface IDbCharacterizeRepository<T> : IDisposable where T : class, ICharacteristic<T>
     {
-        IQueryable<TEntity> GetAll<TEntity>(bool noTracking = true) where TEntity : class,ICharacteristic<TEntity>;
+        IQueryable<TEntity> GetAll<TEntity>(bool noTracking = true) where TEntity : class, ICharacteristic<TEntity>;
         TEntity Add<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>;
 
 
         TEntity Delete<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>;
-       TEntity Attach<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>;
+        TEntity Attach<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>;
         TEntity AttachIfNot<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>;
 
         int Commit();

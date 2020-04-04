@@ -9,7 +9,7 @@ namespace Data.Repositories
 {
     public interface ICharacterRepository
     {
-        void Create(string firstName, string lastName, Gender gender);
+        void Create(string firstName, string lastName, string pseudo, EnumGender gender);
         void Update();
     }
 }

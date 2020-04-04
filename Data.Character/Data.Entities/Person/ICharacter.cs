@@ -13,7 +13,7 @@ namespace Data.Entities.Person
 
         string LastName { get; set; }
 
-        Gender Gender { get; set; }
+        EnumGender Gender { get; set; }
 
         bool Alive { get; set; }
 
