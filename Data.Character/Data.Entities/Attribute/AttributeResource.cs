@@ -7,7 +7,7 @@ namespace Data.Entities.Attribute
     public class AttributeResource : IAttribute<AttributeResource>
     {
         public int IdCharactere { get; set; }
-        public int IdCorporation { get; set; }
+        public int Id { get; set; }
         public int Value { get; set; }
 
         //  The below properties will always be the same value 

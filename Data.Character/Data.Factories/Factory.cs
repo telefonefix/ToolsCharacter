@@ -1,6 +1,7 @@
 ﻿using Autofac;
+using Data.Entities.Attribute;
 using Data.Entities.Characterize;
-using Data.Entities.Corporation;
+using Data.Entities.Enterprise;
 using Data.Entities.Patent;
 using Data.Entities.Person;
 using Data.Repositories;
@@ -23,6 +24,7 @@ namespace Data.Factories
     public class Factory : IFactory
     {
         #region Attributs
+        private int _idCharactere;
         private IContainer _container;
         private List<string> _features;
         private Dictionary<EnumGender, string> _dicGender;
@@ -33,7 +35,7 @@ namespace Data.Factories
         private List<string> _characterize;
         #endregion
         #region Properties
-        public string Name { get; set; }
+        public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Pseudo { get; set; }
         public string Noun { get; set; }
@@ -146,6 +148,9 @@ namespace Data.Factories
                 SetName(_characterize[0].Split('('), EnumGender.Male);
             }
 
+            DbCharacterRepository repoCharacter = new DbCharacterRepository();
+            _idCharactere = repoCharacter.GetId(FirstName, LastName, Pseudo);
+
             SetCharacterize(new Feature());
             SetCharacterize(new SpecialAbility());
             SetCharacterize(new Skill());
@@ -179,12 +184,15 @@ namespace Data.Factories
 
             // TODO : Faire Repository pour la création de personnage
 
-            CharacterRepository repository = new CharacterRepository();
-            repository.Create(names[0], names[1], names[2],gender);
+            //CharacterRepository repository = new CharacterRepository();
+            DbCharacterRepository repository = new DbCharacterRepository();
+            repository.Create(names[0], names[1], names[2], gender);
 
-            FirstName = names[0];
-            Name = names[1];
-            Pseudo = names[2];
+
+            //repository.
+            //FirstName = names[0];
+            //LastName = names[1];
+            //Pseudo = names[2];
         }
         /// <summary>
         /// Rentre les valeurs
@@ -213,24 +221,35 @@ namespace Data.Factories
                 throw new CharacterException(string.Concat(_missed));
             }
 
+            DbCharacterizeRepository<Feature> repoFeature = new DbCharacterizeRepository<Feature>();
+            DbAttributeRepository<AttributeFeature> repoAttFeature = new DbAttributeRepository<AttributeFeature>();
+
+            DbCharacterizeRepository<SpecialAbility> repoSpecial = new DbCharacterizeRepository<SpecialAbility>();
+            DbAttributeRepository<AttributeSpecialAbility> repoAttSpecial = new DbAttributeRepository<AttributeSpecialAbility>();
+
+
             foreach (KeyValuePair<string, int> item in dico)
             {
                 switch (t)
                 {
                     case Feature f:
 
-                        FeatureRepository repository = new FeatureRepository(new DbCharacterizeRepository<Feature>());
+                        //AttributeFeature attributes = new AttributeFeature();
 
-                        //repository.Create(f,item.Key);
-                        //ICharacteristic<Feature> characteristic = new Feature();
-                        repository.Create<ICharacteristic<Feature>>(f, new Feature(), item.Key);
+                        repoFeature.Create<ICharacteristic<Feature>>(f, new Feature(), item.Key);
 
-
+                        repoAttFeature.Create<IAttribute<AttributeFeature>>
+                            (
+                                new AttributeFeature(),
+                                new AttributeFeature(),
+                                _idCharactere,
+                                repoFeature.Id,
+                                item.Value
+                             );
                         f = new Feature
                         {
                             Id = i,
                             Name = item.Key,
-                            Value = item.Value
                         };
                         features.Add(f);
                         switchToArray = true;
@@ -240,16 +259,25 @@ namespace Data.Factories
                         {
                             Id = i,
                             Name = item.Key,
-                            Value = item.Value
+                            //Value = item.Value
                         };
                         Skills.Add(s);
                         break;
                     case SpecialAbility sa:
+                        repoSpecial.Create<ICharacteristic<SpecialAbility>>(sa, new SpecialAbility(), item.Key);
+                        repoAttSpecial.Create<IAttribute<AttributeSpecialAbility>>
+                            (
+                                new AttributeSpecialAbility(),
+                                new AttributeSpecialAbility(),
+                                _idCharactere,
+                                repoSpecial.Id,
+                                item.Value
+                            );
                         sa = new SpecialAbility
                         {
                             Id = i,
                             Name = item.Key,
-                            Value = item.Value
+                            //Value = item.Value
                         };
                         SpecialAbilities.Add(sa);
                         break;
@@ -258,7 +286,7 @@ namespace Data.Factories
                         {
                             Id = i,
                             Name = item.Key,
-                            Value = item.Value
+                            //Value = item.Value
                         };
                         Ressources.Add(r);
                         break;
@@ -267,6 +295,33 @@ namespace Data.Factories
                 }
                 i++;
             }
+            // TODO : Voir pour faire la sauvegarde vers la DB
+            switch (t)
+            {
+                case Feature f:
+                    repoFeature.Save();
+                    repoAttFeature.Save();
+
+                    repoFeature.Dispose();
+                    repoAttFeature.Dispose();
+
+                    break;
+
+                case SpecialAbility sa:
+                    repoSpecial.Save();
+                    repoAttSpecial.Save();
+
+                    repoSpecial.Dispose();
+                    repoAttSpecial.Dispose();
+                    break;
+                default:
+                    break;
+            }
+            //repoCharacterize.Save();
+            //repoAttFeature.Save();
+
+            //repoCharacterize.Dispose();
+
 
             if (switchToArray)
             {
@@ -710,17 +765,17 @@ namespace Data.Factories
                 ICorporation corpo = scope.Resolve<ICorporation>();
                 IGrade grade = scope.Resolve<IGrade>();
 
-                grade.Category = category;
-                grade.Qty = qty;
-                grade.Rank = SetRank(category, qty);
+                //grade.Category = category;
+                grade.Quantity = qty;
+                grade.Category = SetRank(category);
 
                 corpo.Name = name;
-                corpo.Grade = grade;
+                //corpo.Grade = grade;
 
                 Corporation = corpo;
             }
         }
-        private string SetRank(EnumCategory category, int qty)
+        private string SetRank(EnumCategory category)
         {
             char r;
             char[] rk = { '\u25CF', '\u25BC', '\u2605' };
@@ -740,7 +795,7 @@ namespace Data.Factories
                     break;
             }
 
-            return new string(r, qty);
+            return r.ToString();
         }
 
         #endregion

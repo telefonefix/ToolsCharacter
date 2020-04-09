@@ -9,10 +9,6 @@ namespace Data.Entities.Characterize
     {
         int Id { get; set; }
         string Name { get; set; }
-        int Value { get; set; }
-
-        //ICollection<Character> Characters { get; set; }
-
 
     }
 }

@@ -8,23 +8,24 @@ using System.Text;
 
 namespace Data.Entities.Attribute
 {
+    [Table("AttributeFeatures")]
     public class AttributeFeature : IAttribute<AttributeFeature>
     {
         [Key, Column(Order = 0)]
         public int IdCharactere { get; set; }
         [Key, Column(Order = 1)]
-        public int IdFeature { get; set; }
-
-        public virtual Character Character { get; set; }
-
-        public virtual Feature Feature { get; set; }
+        public int Id { get; set; }
         public int Value { get; set; }
-
         //  The below properties will always be the same value 
         //  Multiplier = 1 and Acquired = 0
         public int Multiplier { get; set; }
         public int Acquired { get; set; }
 
+        public virtual Character Character { get; set; }
 
+        public virtual Feature Feature { get; set; }
+
+      
+        
     }
 }

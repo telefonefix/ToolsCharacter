@@ -1,6 +1,5 @@
 ﻿using Data.Entities.Attribute;
-using Data.Entities.Characterize;
-using Data.Entities.Corporation;
+using Data.Entities.Enterprise;
 using System.Collections.Generic;
 
 namespace Data.Entities.Person
@@ -18,12 +17,11 @@ namespace Data.Entities.Person
         bool Alive { get; set; }
 
         ICollection<AttributeFeature> AttributeFeatures { get; set; }
+        ICollection<AttributeSpecialAbility> AttributeSpecialAbilities { get; set; }
 
-        List<Skill> Skills { get; set; }
+        
 
-        List<SpecialAbility> SpecialAbilities { get; set; }
-
-        ICorporation Corpo { get; set; }
+        Corporation Corporation { get; set; }
 
         Ethnic Ethnic { get; set; }
     }

@@ -4,9 +4,11 @@ using System.Text;
 
 namespace Data.Entities.Attribute
 {
-    public interface IAttribute<T>
+    public interface IAttribute<TEntity> where TEntity : class
     {
         int IdCharactere { get; set; }
+
+        int Id { get; set; }
 
         int Value { get; set; }
 

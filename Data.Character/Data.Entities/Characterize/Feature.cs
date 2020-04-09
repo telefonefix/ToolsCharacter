@@ -9,17 +9,19 @@ namespace Data.Entities.Characterize
     [Table("Features")]
     public class Feature : ICharacteristic<Feature>
     {
+        /// <summary>
+        /// Columns
+        /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
 
-
-        public int Value { get; set; }
-        //public ICollection<Character> Characters { get; set; }
-
+        /// <summary>
+        /// Relationships
+        /// </summary>
         public ICollection<AttributeFeature> AttributeFeatures { get; set; }
-
-
+        public ICollection<Skill> Skills { get; set; }
     }
 
     public enum EnumFeatures

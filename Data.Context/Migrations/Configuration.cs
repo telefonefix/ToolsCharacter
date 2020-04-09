@@ -1,6 +1,7 @@
 ﻿namespace Data.Context.Migrations
 {
     using Data.Entities.Characterize;
+    using Data.Entities.Enterprise;
     using Data.Entities.Person;
     using System;
     using System.Collections.Generic;
@@ -20,12 +21,12 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             SetFeature(context);
             SetEthnic(context);
+            SetGrade(context);
         }
-
-
         private void SetFeature(CharactereContext context)
         {
             foreach (EnumFeatures feature in Enum.GetValues(typeof(EnumFeatures)).Cast<EnumFeatures>())
@@ -77,6 +78,50 @@
                     context.Ethnics.AddOrUpdate(eth);
                 }
             }
+        }
+
+        private void SetGrade(CharactereContext context)
+        {
+            Dictionary<EnumCategory, char> dicoGrade = new Dictionary<EnumCategory, char>()
+            {
+                { EnumCategory.Circle,'\u25CF' },
+                { EnumCategory.Triangle,'\u25BC' },
+                { EnumCategory.Star, '\u2605' }
+            };
+
+            Dictionary<EnumCategory, int> dicoResource = new Dictionary<EnumCategory, int>()
+            {
+                { EnumCategory.Circle,1 },
+                { EnumCategory.Triangle,4 },
+                { EnumCategory.Star, 6 }
+            };
+
+            Dictionary<EnumCategory, int> dicoSalary = new Dictionary<EnumCategory, int>()
+            {
+                { EnumCategory.Circle,7000},
+                { EnumCategory.Triangle,20000 },
+                { EnumCategory.Star, 50000 }
+            };
+
+            foreach (var item in Enum.GetValues(typeof(EnumCategory)).Cast<EnumCategory>())
+            {
+                for (int i = 1; i < 6; i++)
+                {
+                    Grade grade = new Grade()
+                    {
+                        Category = dicoGrade[item].ToString(),
+                        Quantity = i,
+                        Ressource = dicoResource[item] + (i / 2),
+                        Salary = dicoSalary[item]+(i*(int)item*1000)
+                    };
+                    IQueryable<Grade> query = context.Grades.Where(f => f.Category == grade.Category);
+                    if (query.Count() == 0)
+                    {
+                        context.Grades.AddOrUpdate(grade);
+                    }
+                }
+            }
+
         }
     }
 }

@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -52,13 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharactereContext.cs" />
-    <Compile Include="Migrations\202004031729143_1.cs" />
-    <Compile Include="Migrations\202004031729143_1.designer.cs">
-      <DependentUpon>202004031729143_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004031731340_2.cs" />
-    <Compile Include="Migrations\202004031731340_2.designer.cs">
-      <DependentUpon>202004031731340_2.cs</DependentUpon>
+    <Compile Include="Migrations\202004091918306_first.cs" />
+    <Compile Include="Migrations\202004091918306_first.designer.cs">
+      <DependentUpon>202004091918306_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,11 +72,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004031729143_1.resx">
-      <DependentUpon>202004031729143_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004031731340_2.resx">
-      <DependentUpon>202004031731340_2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004091918306_first.resx">
+      <DependentUpon>202004091918306_first.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

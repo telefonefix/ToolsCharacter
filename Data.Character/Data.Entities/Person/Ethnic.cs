@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Data.Entities.Person
 {
-    [Table("Ethnic")]
+    [Table("Ethnics")]
     public class Ethnic : IEthnic
     {
         [Key]

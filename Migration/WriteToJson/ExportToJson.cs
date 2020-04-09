@@ -114,7 +114,7 @@ namespace WriteToJson
             
             _factory.CreateCharacter(_characterize, gender);
             
-            _fileName = _factory.FirstName + "_" + _factory.Name;
+            _fileName = _factory.FirstName + "_" + _factory.LastName;
             _json = JsonConvert.SerializeObject(_factory, Formatting.Indented);
             File.WriteAllText(string.Format(@".\Output\{0}.json", _fileName), _json);
 

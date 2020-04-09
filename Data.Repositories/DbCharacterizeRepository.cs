@@ -2,6 +2,7 @@
 using Data.Entities.Characterize;
 using System;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,12 +13,12 @@ namespace Data.Repositories
     {
         protected CharactereContext _context;
 
+        public int Id { get; private set; }
+
         public CharactereContext Context { get { return _context; } }
         public TEntity Add<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>
-        {
-            //throw new NotImplementedException();
+        {            
             return _context.Set<TEntity>().Add(entity);
-
         }
 
         public TEntity Attach<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>
@@ -47,7 +48,7 @@ namespace Data.Repositories
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _context.Dispose();
         }
 
         public TResult Execute<TResult>(string functionName, params object[] parameters)
@@ -64,7 +65,16 @@ namespace Data.Repositories
 
         public int GetId<TEntity>(TEntity entity, string name) where TEntity : class, ICharacteristic<TEntity>
         {
-            return GetAll<TEntity>().FirstOrDefault(t => t.Name == name).Id;
+            
+            try
+            {
+                int id = GetAll<TEntity>().FirstOrDefault(t => t.Name == name).Id;
+                return id;
+            }
+            catch (NullReferenceException)
+            {
+                return 0;
+            }
         }
 
 
@@ -79,8 +89,27 @@ namespace Data.Repositories
         {
             _context = new CharactereContext();
             _context.Configuration.LazyLoadingEnabled = false;
-
         }
 
+        public void Create<ICharacteristic>(T entity, ICharacteristic<T> charac, string name)
+        {            
+            int id = GetId(entity, name);
+
+            // Not found so add it
+            if (id == 0)
+            {
+                entity.Name = name.ToUpper();
+                Add<T>(entity);
+                _context.SaveChanges();
+                // Return new Id
+                id = GetId(entity, name);
+            }
+            Id = id;
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
     }
 }
