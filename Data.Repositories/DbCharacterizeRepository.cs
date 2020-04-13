@@ -2,7 +2,6 @@
 using Data.Entities.Characterize;
 using System;
 using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,7 +16,7 @@ namespace Data.Repositories
 
         public CharactereContext Context { get { return _context; } }
         public TEntity Add<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>
-        {            
+        {
             return _context.Set<TEntity>().Add(entity);
         }
 
@@ -65,7 +64,6 @@ namespace Data.Repositories
 
         public int GetId<TEntity>(TEntity entity, string name) where TEntity : class, ICharacteristic<TEntity>
         {
-            
             try
             {
                 int id = GetAll<TEntity>().FirstOrDefault(t => t.Name == name).Id;
@@ -92,17 +90,49 @@ namespace Data.Repositories
         }
 
         public void Create<ICharacteristic>(T entity, ICharacteristic<T> charac, string name)
-        {            
+        {
             int id = GetId(entity, name);
 
             // Not found so add it
             if (id == 0)
             {
-                entity.Name = name.ToUpper();
+                entity.Name = name.ToUpper();                
                 Add<T>(entity);
-                _context.SaveChanges();
-                // Return new Id
                 id = GetId(entity, name);
+
+
+                Save();
+                // Return new Id
+            }
+            Id = id;
+        }
+
+
+
+        public void Create<ICharacteristic>(T entity, ICharacteristic<T> charac, string name, string feature)
+        {
+            int id = GetId(entity, name);
+
+
+            // Not found so add it
+            if (id == 0)
+            {
+                if (entity.GetType() == typeof(Skill))
+                {
+                    Skill skill = new Skill();
+                    skill.Name = name;
+                    skill.IdFeature = GetId<Feature>(new Feature(), feature);
+                    Add<Skill>(skill);
+                    Save();
+                    id = GetId(skill, name);
+                }
+                else
+                {
+                    entity.Name = name;
+                    Add<T>(entity);
+                    Save();
+                    id = GetId(entity, name);
+                }
             }
             Id = id;
         }

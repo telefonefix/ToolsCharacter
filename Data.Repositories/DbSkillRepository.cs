@@ -1,37 +1,47 @@
-﻿using System;
+﻿using Data.Context;
+using Data.Entities.Characterize;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Data.Context;
-using Data.Entities.Enterprise;
 
 namespace Data.Repositories
 {
-    public class DbCorporationRepository : IDbCorporationRepository
+    public class DbSkillRepository : IDbSkillRepository
     {
         protected CharactereContext _context;
-        public int Id { get; set; }
 
-        public DbCorporationRepository(CharactereContext context)
+        public int Id { get; private set; }
+
+
+        public DbSkillRepository(CharactereContext context)
         {
             _context = context;
             _context.Configuration.LazyLoadingEnabled = false;
         }
 
-        public DbCorporationRepository()
+        public DbSkillRepository()
         {
             _context = new CharactereContext();
             _context.Configuration.LazyLoadingEnabled = false;
         }
 
-
-
-        private Corporation Add(Corporation corporation)
+        public Skill Add(Skill skill)
         {
-            return _context.Set<Corporation>().Add(corporation);
+            return _context.Set<Skill>().Add(skill);
+        }
+
+        public TEntity Attach<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TEntity AttachIfNot<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
         }
 
         public int Commit()
@@ -44,15 +54,19 @@ namespace Data.Repositories
             throw new NotImplementedException();
         }
 
+        public TEntity Delete<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public TResult Execute<TResult>(string functionName, params object[] parameters)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Corporation> GetAll(bool noTracking = true)
+        public IQueryable<Skill> GetAll(bool noTracking = true)
         {
-            DbSet<Corporation> entityDbSet = _context.Set<Corporation>();
-
+            DbSet<Skill> entityDbSet = _context.Set<Skill>();
             return entityDbSet;
         }
 
@@ -60,7 +74,7 @@ namespace Data.Repositories
         {
             try
             {
-                int id = GetAll().FirstOrDefault(t => t.Name == name).IdCorporation;
+                int id = GetAll().FirstOrDefault(t => t.Name == name).Id;
                 return id;
             }
             catch (NullReferenceException)
@@ -68,29 +82,47 @@ namespace Data.Repositories
                 return 0;
             }
         }
+        public void Create(string name, string nameFeature)
+        {
+            DbCharacterizeRepository<Feature> feature = new DbCharacterizeRepository<Feature>();
+                int id = GetId(name);
+
+            int idFeature = feature.GetId<Feature>(new Feature(), nameFeature);
+            Skill skill = new Skill();
+            // Not found so add it
+            if (id == 0)
+            {
+                skill.Name = name.ToUpper();
+                skill.IdFeature = idFeature;
+                Add(skill);
+                Save();
+                // Return new Id
+                id = GetId(name);
+            }
+            Id = id;
+        }
 
         #region IDisposable Support
-        private bool _disposedValue = false; // Pour détecter les appels redondants
+        private bool disposedValue = false; // Pour détecter les appels redondants
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposedValue)
+            if (!disposedValue)
             {
                 if (disposing)
                 {
                     _context.Dispose();
-                    // TODO: supprimer l'état managé (objets managés).
                 }
 
                 // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
                 // TODO: définir les champs de grande taille avec la valeur Null.
 
-                _disposedValue = true;
+                disposedValue = true;
             }
         }
 
         // TODO: remplacer un finaliseur seulement si la fonction Dispose(bool disposing) ci-dessus a du code pour libérer les ressources non managées.
-        // ~DbCorporationRepository() {
+        // ~DbSkillRepository() {
         //   // Ne modifiez pas ce code. Placez le code de nettoyage dans Dispose(bool disposing) ci-dessus.
         //   Dispose(false);
         // }
@@ -103,31 +135,11 @@ namespace Data.Repositories
             // TODO: supprimer les marques de commentaire pour la ligne suivante si le finaliseur est remplacé ci-dessus.
             // GC.SuppressFinalize(this);
         }
-
-        public void Create(string name)
-        {
-            int id = GetId(name);
-            Corporation corporation = new Corporation();
-            // Not found so add it
-            if (id == 0)
-            {
-                corporation.Name = name;
-                corporation.IsGang = false;
-                corporation.Color = "Yellow";
-
-                //Corporation corpo = Add(corporation);
-                Save();
-                // Return new Id
-                //id = corpo.IdCorporation;
-                id = GetId(name);
-            }
-            Id = id;
-        }
+        #endregion
 
         public void Save()
         {
             _context.SaveChanges();
         }
-        #endregion
     }
 }

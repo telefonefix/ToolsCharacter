@@ -50,19 +50,25 @@
                 "dbo.AttributeResources",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
                         IdCharactere = c.Int(nullable: false),
+                        Id = c.Int(nullable: false),
                         Value = c.Int(nullable: false),
                         Multiplier = c.Int(nullable: false),
                         Acquired = c.Int(nullable: false),
-                        Character_Id = c.Int(),
-                        Resource_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Characters", t => t.Character_Id)
-                .ForeignKey("dbo.Resources", t => t.Resource_Id)
-                .Index(t => t.Character_Id)
-                .Index(t => t.Resource_Id);
+                .PrimaryKey(t => new { t.IdCharactere, t.Id })
+                .ForeignKey("dbo.Characters", t => t.Id, cascadeDelete: true)
+                .ForeignKey("dbo.Resources", t => t.Id, cascadeDelete: true)
+                .Index(t => t.Id);
+            
+            CreateTable(
+                "dbo.Resources",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AttributeSkills",
@@ -159,20 +165,10 @@
                     })
                 .PrimaryKey(t => t.Id);
             
-            CreateTable(
-                "dbo.Resources",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AttributeResources", "Resource_Id", "dbo.Resources");
             DropForeignKey("dbo.AttributeFeatures", "Id", "dbo.Features");
             DropForeignKey("dbo.AttributeFeatures", "IdCharactere", "dbo.Characters");
             DropForeignKey("dbo.Characters", "IdGrade", "dbo.Grades");
@@ -183,20 +179,19 @@
             DropForeignKey("dbo.AttributeSkills", "Id", "dbo.Skills");
             DropForeignKey("dbo.Skills", "IdFeature", "dbo.Features");
             DropForeignKey("dbo.AttributeSkills", "IdCharactere", "dbo.Characters");
-            DropForeignKey("dbo.AttributeResources", "Character_Id", "dbo.Characters");
+            DropForeignKey("dbo.AttributeResources", "Id", "dbo.Resources");
+            DropForeignKey("dbo.AttributeResources", "Id", "dbo.Characters");
             DropIndex("dbo.AttributeSpecialAbilities", new[] { "Id" });
             DropIndex("dbo.AttributeSpecialAbilities", new[] { "IdCharactere" });
             DropIndex("dbo.Skills", new[] { "IdFeature" });
             DropIndex("dbo.AttributeSkills", new[] { "Id" });
             DropIndex("dbo.AttributeSkills", new[] { "IdCharactere" });
-            DropIndex("dbo.AttributeResources", new[] { "Resource_Id" });
-            DropIndex("dbo.AttributeResources", new[] { "Character_Id" });
+            DropIndex("dbo.AttributeResources", new[] { "Id" });
             DropIndex("dbo.Characters", new[] { "IdEthnic" });
             DropIndex("dbo.Characters", new[] { "IdGrade" });
             DropIndex("dbo.Characters", new[] { "IdCorporation" });
             DropIndex("dbo.AttributeFeatures", new[] { "Id" });
             DropIndex("dbo.AttributeFeatures", new[] { "IdCharactere" });
-            DropTable("dbo.Resources");
             DropTable("dbo.Grades");
             DropTable("dbo.Ethnics");
             DropTable("dbo.Corporations");
@@ -205,6 +200,7 @@
             DropTable("dbo.Features");
             DropTable("dbo.Skills");
             DropTable("dbo.AttributeSkills");
+            DropTable("dbo.Resources");
             DropTable("dbo.AttributeResources");
             DropTable("dbo.Characters");
             DropTable("dbo.AttributeFeatures");

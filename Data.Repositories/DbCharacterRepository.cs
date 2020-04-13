@@ -9,9 +9,62 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
+    enum Position
+    {
+        Corporation,
+        Grade
+    }
+
     public class DbCharacterRepository : IDbCharacterRepository
     {
+        #region Attibutes
         protected CharactereContext _context;
+
+        
+        // TODO : A laisser
+        //private Position _position;
+        #endregion Attibutes
+
+        #region Private Methods
+
+        private Character Add(Character character)
+        {
+            return _context.Set<Character>().Add(character);
+        }
+
+
+        // TODO : A garder pour le moment : Connaitre la position dans une corpo
+        //private int? GetIdPosition(int id, Position position)
+        //{
+        //    int? idPosition = null;
+        //    if (id != 0)
+        //    {
+        //        try
+        //        {
+        //            switch (position)
+        //            {
+        //                case Position.Corporation:
+        //                    idPosition = GetAll().FirstOrDefault(t => t.Id == id).IdCorporation;
+        //                    break;
+        //                case Position.Grade:
+        //                    idPosition = GetAll().FirstOrDefault(t => t.Id == id).IdGrade;
+        //                    break;
+        //                default:
+        //                    idPosition = null;
+        //                    break;
+        //            }
+
+
+        //        }
+        //        catch (Exception)
+        //        {
+        //            idPosition = null;
+        //        }
+        //    }
+        //    return idPosition;
+        //}
+        #endregion Private Methods
+
         public int Id { get; private set; }
 
         public DbCharacterRepository(CharactereContext context)
@@ -29,25 +82,28 @@ namespace Data.Repositories
         public CharactereContext Context { get { return _context; } }
 
 
-        private Character Add(Character character)        
-        {
-            return _context.Set<Character>().Add(character);
-        }
 
 
-        public void Create( string firstName, string lastName, string pseudo, EnumGender gender)
+
+        public void Create(string firstName, string lastName, string pseudo, EnumGender gender, int? corpo, int? grade)
         {
             int id = GetId(firstName, lastName, pseudo);
+            //int idCorpo = 
+
             Character character = new Character();
             // Not found so add it
             if (id == 0)
             {
-                character.FirstName  = firstName;
+                
+                character.FirstName = firstName;
                 character.LastName = lastName.ToUpper();
                 character.Pseudo = pseudo.ToUpper();
+                character.IdCorporation = corpo;
+                character.IdGrade = grade;
+                character.IdEthnic = 1;
 
                 Add(character);
-                _context.SaveChanges();
+                Save();
                 // Return new Id
                 id = GetId(firstName, lastName, pseudo);
             }
@@ -83,7 +139,17 @@ namespace Data.Repositories
 
         public int GetId(string firstName, string lastName, string pseudo)
         {
-            return GetAll().FirstOrDefault(t => t.FirstName == firstName && t.LastName == lastName && t.Pseudo == pseudo).Id;
+            int id;
+            try
+            {
+                id = GetAll().FirstOrDefault(t => t.FirstName == firstName && t.LastName == lastName && t.Pseudo == pseudo).Id;
+                return id;
+            }
+            catch (NullReferenceException)
+            {
+                id = 0;
+            }
+            return id;
         }
 
         #region IDisposable Support

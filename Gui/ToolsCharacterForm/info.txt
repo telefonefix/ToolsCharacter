@@ -13,10 +13,11 @@ Les textes requis :
 En rouge gras tous les champs sont requis '?' correspond à un chiffre
 (EMP ? | CON ? | BT ? | INT ? | SF ? | MVT ? | REF ? | TEK(TECH) ? )
 
-En orange (Au moins une des capacitès spéciales ci-dessous) doit être indiqués
+Si votre personnage n'a aucune capacitè spéciale, ne rien mettre en dessous sinon elles peuvent être indiqués comme la ligne en dessous.
 SENS DU COMBAT(SDC) | FURTIVITE (FURT) | SYSTEME D | INTERFACE | AUTORITE | CHARISME(CHAR) | FIXER | MEDTECH(MEDTEK) | MEDIA | TECHI
 
 En vert gras : il faut minimum 2 indications (Indications des abrégés)
+Les compétences dépendent d'une caractéristique mettre entre crochet la dépendance puis la compétence en dessous. (Cf. le fichier exmeple)
 (Baratin & Persuasion)		-> Baratin
 (Perception humaine) 		-> Perc. Hum.
 (Perception)				-> Perc.

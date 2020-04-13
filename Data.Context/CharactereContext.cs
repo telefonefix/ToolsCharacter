@@ -73,6 +73,12 @@ namespace Data.Context
                 a.Id
             });
 
+            modelBuilder.Entity<AttributeResource>().HasKey(a =>
+            new
+            {
+                a.IdCharactere,
+                a.Id
+            });
 
             //******************************************************************************************
             // Relationships 

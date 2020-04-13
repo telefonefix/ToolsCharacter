@@ -57,6 +57,8 @@
     <Compile Include="DbCharacterRepository.cs" />
     <Compile Include="DbCharacterizeRepository.cs" />
     <Compile Include="DbCorporationRepository.cs" />
+    <Compile Include="DbGradeRepository.cs" />
+    <Compile Include="DbSkillRepository.cs" />
     <Compile Include="ICharacterRepository.cs" />
     <Compile Include="ICorporationRepository.cs" />
     <Compile Include="IDbAttributeRepository.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="IDbCharacterizeRepository.cs" />
     <Compile Include="ICharacterizeRepository.cs" />
     <Compile Include="IDbCorporationRepository.cs" />
+    <Compile Include="IDbGradeRepository.cs" />
+    <Compile Include="IDbSkillRepository.cs" />
     <Compile Include="PatentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

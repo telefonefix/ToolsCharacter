@@ -139,7 +139,7 @@ namespace Data.Repositories
                 entity.Value = value;
 
                 Add<T>(entity);
-                //_context.SaveChanges();
+                Save();
             }
 
             //_context.
