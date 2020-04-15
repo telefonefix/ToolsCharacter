@@ -1,4 +1,5 @@
 ﻿using Data.Entities.Attribute;
+using Data.Entities.Characterize;
 using System;
 using System.Linq;
 using System.Threading;
@@ -6,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public interface IDbAttributeRepository<T> : IDisposable where T : class, IAttribute<T>
+    //public interface IDbAttributeRepository<T> : IDisposable where T : class, IAttribute<T>
+    //public interface IDbAttributeRepository<TCharacterize, TAtttibute> where TCharacterize : class, ICharacteristic<TCharacterize> where TAtttibute : class, IAttribute<TAtttibute>
+    public interface IDbAttributeRepository<TCharacterize> where TCharacterize : class, ICharacteristic<TCharacterize>
     {
         IQueryable<TEntity> GetAll<TEntity>(bool noTracking = true) where TEntity : class, IAttribute<TEntity>;
         TEntity Add<TEntity>(TEntity entity) where TEntity : class, IAttribute<TEntity>;

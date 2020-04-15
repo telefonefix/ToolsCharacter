@@ -1,5 +1,6 @@
 ﻿using Data.Context;
 using Data.Entities.Attribute;
+using Data.Entities.Characterize;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -9,9 +10,27 @@ using System.Threading.Tasks;
 namespace Data.Repositories
 {
 
-    public class DbAttributeRepository<T> : IDbAttributeRepository<T> where T : class, IAttribute<T>
+    //public class DbAttributeRepository<T> : IDbAttributeRepository<T> where T : class, IAttribute<T>
+    public class DbAttributeRepository<TCharacterize> : IDbAttributeRepository<TCharacterize> where TCharacterize : class, ICharacteristic<TCharacterize>
+        //public class DbAttributeRepository<TCharacterize, TAtttibute> : IDbAttributeRepository<TCharacterize, TAtttibute> where TCharacterize : class, ICharacteristic<TCharacterize> where TAtttibute : class, IAttribute<TAtttibute>
     {
         protected CharactereContext _context;
+
+        //public TAtttibute GetAttributeEntity<TCharacterize, TAtttibute>(TCharacterize entity) where TCharacterize : class, IDbAttributeRepository<T> where TAtttibute : class, IDbAttributeRepository<TEntity>
+        //{
+        //    switch (entity)
+        //    {
+        //        case Feature f:
+        //            return AttributeFeature();
+        //            break;
+        //        default:
+        //            break;
+        //    }
+
+        //    return
+
+        //}
+
 
         public DbAttributeRepository(CharactereContext context)
         {
@@ -48,38 +67,60 @@ namespace Data.Repositories
         }
 
 
-        TEntity IDbAttributeRepository<T>.Attach<TEntity>(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        //TEntity IDbAttributeRepository<TEntity>.Attach<TEntity>(TEntity entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        TEntity IDbAttributeRepository<T>.AttachIfNot<TEntity>(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        //TEntity IDbAttributeRepository<T>.AttachIfNot<TEntity>(TEntity entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        TEntity IDbAttributeRepository<T>.Delete<TEntity>(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        //TEntity IDbAttributeRepository<T>.Delete<TEntity>(TEntity entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        IQueryable<TEntity> IDbAttributeRepository<T>.GetAll<TEntity>(bool noTracking)
-        {
-            throw new NotImplementedException();
-        }
+        //IQueryable<TEntity> IDbAttributeRepository<T>.GetAll<TEntity>(bool noTracking)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public IQueryable<TEntity> GetAll<TEntity>(bool noTracking = true) where TEntity : class, IAttribute<TEntity>
-        {
-            DbSet<TEntity> entityDbSet = _context.Set<TEntity>();
+        //public IQueryable<TAttribute> GetAll<TCharac,TAttribute>(TCharac entity,bool noTracking = true) where TCharac : class, ICharacteristic<TCharac> where TAttribute : class,IAttribute<TAttribute>
+        //{
+        //    DbSet<TAttribute> entityDbSet = _context.Set<TAttribute>();
 
-            return entityDbSet;
-        }
+        //    return entityDbSet;
 
-        public TEntity GetEntity<TEntity>(TEntity entity, int idPerson, int idCharacterize) where TEntity : class, IAttribute<TEntity>
+        //    //switch (entity)
+        //    //{
+        //    //    case Feature feature:
+        //    //        //DbSet<TAttribute> entityDbSet = _context.Set<TAttribute>();
+        //    //        DbSet<AttributeFeature> entityDbSet = _context.Set<AttributeFeature>();
+        //    //        //return entityDbSet.SelectMany<TCharac, TAttribute>();
+
+        //    //        var query<Attribute = entityDbSet.Select(af => af.Id != 0 && af.IdCharactere != 0);
+        //    //        return query;
+
+        //    //    //return entityDbSet.Select<AttributeFeature>(;
+
+        //    //    default:
+        //    //        break;
+        //    //}
+        //    //return null;
+
+
+        //    //DbSet<TEntity> entityDbSet = _context.Set<TEntity>();
+
+        //    //return entityDbSet;
+        //}
+
+        public TResult GetEntity<TSource>(TSource entity, int idPerson, int idCharacterize) where TSource : class, ICharacteristic<TSource> where TResult : class, IAttribute<TResult>
         {
             //try
             //{
-            TEntity query = GetAll<TEntity>().FirstOrDefault(t => t.IdCharactere == idPerson && t.Id == idCharacterize);
+            var query = GetAll<TSource>().FirstOrDefault(t => t.IdCharactere == idPerson && t.Id == idCharacterize);
             //if (query != null)
             return query;
             //}
@@ -87,6 +128,12 @@ namespace Data.Repositories
             //{
             //    return 0;
             //}
+        }
+
+        private IQueryable<TResult> GetAll<TSource, TResult>() where TSource : class, ICharacteristic<TSource> where TResult : class, IAttribute<TResult>
+        {
+            DbSet<TResult> entityDbSet = _context.Set<TResult>();
+            return entityDbSet;
         }
 
         #region IDisposable Support
@@ -182,6 +229,46 @@ namespace Data.Repositories
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        IQueryable<TEntity> IDbAttributeRepository<TCharacterize, TAtttibute>.GetAll<TEntity>(bool noTracking)
+        {
+            throw new NotImplementedException();
+        }
+
+        TEntity IDbAttributeRepository<TCharacterize, TAtttibute>.Delete<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        TEntity IDbAttributeRepository<TCharacterize, TAtttibute>.Attach<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        TEntity IDbAttributeRepository<TCharacterize, TAtttibute>.AttachIfNot<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<TEntity> IDbAttributeRepository<TCharacterize>.GetAll<TEntity>(bool noTracking)
+        {
+            throw new NotImplementedException();
+        }
+
+        TEntity IDbAttributeRepository<TCharacterize>.Delete<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        TEntity IDbAttributeRepository<TCharacterize>.Attach<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        TEntity IDbAttributeRepository<TCharacterize>.AttachIfNot<TEntity>(TEntity entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

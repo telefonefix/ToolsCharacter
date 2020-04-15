@@ -197,9 +197,9 @@ namespace Data.Factories
         /// Rentre les valeurs
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="t"></param>
+        /// <param name="entity"></param>
         /// <param name="dico"></param>
-        private bool SetCharacterize<TEntity>(TEntity t) where TEntity : class, ICharacteristic<TEntity>
+        private bool SetCharacterize<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>
         {
             List<string> items = new List<string>();
             List<Feature> features = new List<Feature>();
@@ -212,13 +212,13 @@ namespace Data.Factories
             _missed = new List<string>();
 
             // For Features, all fields are required
-            if (t.GetType() == typeof(Feature))
+            if (entity.GetType() == typeof(Feature))
             {
                 _missed.Add(string.Concat("Il manque les caractéristiques suivantes :", Environment.NewLine));
                 message = string.Concat("Il manque les caractéristiques suivantes :", Environment.NewLine);
             }
 
-            if (t.GetType() == typeof(Skill))
+            if (entity.GetType() == typeof(Skill))
             {
 
                 if (!CheckSkill(ref dicCharacValue, ref dicSkillFeature))
@@ -228,7 +228,7 @@ namespace Data.Factories
             }
             else
             {
-                if (!CheckCharacterize(t, ref dicCharacValue))
+                if (!CheckCharacterize(entity, ref dicCharacValue))
                 {
                     throw new CharacterException(string.Concat(_missed));
                 }
@@ -240,8 +240,11 @@ namespace Data.Factories
 
             // TODO: A voir pour optimiser cela
 
-            DbCharacterizeRepository<Feature> repoFeature = new DbCharacterizeRepository<Feature>();
-            DbAttributeRepository<AttributeFeature> repoAttFeature = new DbAttributeRepository<AttributeFeature>();
+            DbCharacterizeRepository<TEntity> repository = new DbCharacterizeRepository<TEntity>();
+            DbAttributeRepository<TEntity,TAttribute> attributeRepository = new DbAttributeRepository<TEntity, TAttribute>();
+
+            //DbCharacterizeRepository<Feature> repoFeature = new DbCharacterizeRepository<Feature>();
+            DbAttributeRepository <AttributeFeature> repoAttFeature = new DbAttributeRepository<AttributeFeature>();
 
             DbCharacterizeRepository<SpecialAbility> repoSpecial = new DbCharacterizeRepository<SpecialAbility>();
             DbAttributeRepository<AttributeSpecialAbility> repoAttSpecial = new DbAttributeRepository<AttributeSpecialAbility>();
@@ -254,19 +257,20 @@ namespace Data.Factories
 
             foreach (KeyValuePair<string, int> item in dicCharacValue)
             {
-                switch (t)
+                switch (entity)
                 {
                     case Feature f:
 
                         //AttributeFeature attributes = new AttributeFeature();
 
-                        repoFeature.Create<ICharacteristic<TEntity>>(f, new Feature(), item.Key);
+                        repository.Create<ICharacteristic<TEntity>>(entity, entity,item.Key);
+
                         repoAttFeature.Create<IAttribute<AttributeFeature>>
                             (
                                 new AttributeFeature(),
                                 new AttributeFeature(),
                                 _idCharactere,
-                                repoFeature.Id,
+                                repository.Id,
                                 item.Value
                              );
                         //f = new Feature
@@ -345,13 +349,13 @@ namespace Data.Factories
                 i++;
             }
             // TODO : Voir pour faire la sauvegarde vers la DB
-            switch (t)
+            switch (entity)
             {
                 case Feature f:
                     //repoFeature.Save();
                     //repoAttFeature.Save();
-
-                    repoFeature.Dispose();
+                    repository.Dispose();
+                    //repoFeature.Dispose();
                     repoAttFeature.Dispose();
 
                     break;
@@ -530,8 +534,7 @@ namespace Data.Factories
             _missed = new List<string>();
 
             string message = string.Empty;
-
-            _missed.Clear();
+                        
             _missed.Add(string.Concat("Des erreurs ont été trouvé : ", Environment.NewLine));
 
             foreach (string d in datas)
