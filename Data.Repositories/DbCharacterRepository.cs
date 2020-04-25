@@ -20,7 +20,7 @@ namespace Data.Repositories
         #region Attibutes
         protected CharactereContext _context;
 
-        
+        public CharactereContext Context => _context;
         // TODO : A laisser
         //private Position _position;
         #endregion Attibutes
@@ -79,28 +79,25 @@ namespace Data.Repositories
             _context.Configuration.LazyLoadingEnabled = false;
         }
 
-        public CharactereContext Context { get { return _context; } }
-
-
-
-
-
         public void Create(string firstName, string lastName, string pseudo, EnumGender gender, int? corpo, int? grade)
         {
             int id = GetId(firstName, lastName, pseudo);
-            //int idCorpo = 
 
-            Character character = new Character();
-            // Not found so add it
+            int? idcorpo = (corpo == 0) ? null : corpo;
+            int? idgrade = (grade == 0) ? null : grade;
+
+
             if (id == 0)
             {
-                
-                character.FirstName = firstName;
-                character.LastName = lastName.ToUpper();
-                character.Pseudo = pseudo.ToUpper();
-                character.IdCorporation = corpo;
-                character.IdGrade = grade;
-                character.IdEthnic = 1;
+                Character character = new Character
+                {
+                    FirstName = firstName,
+                    LastName = lastName.ToUpper().Trim(),
+                    Pseudo = pseudo.ToUpper().Trim(),
+                    IdCorporation = (corpo == 0) ? null : corpo,
+                    IdGrade = (grade == 0) ? null : grade,
+                    IdEthnic = 1
+                };
 
                 Add(character);
                 Save();
@@ -120,7 +117,7 @@ namespace Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<int> CommitAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public Task<int> CommitAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
@@ -142,7 +139,7 @@ namespace Data.Repositories
             int id;
             try
             {
-                id = GetAll().FirstOrDefault(t => t.FirstName == firstName && t.LastName == lastName && t.Pseudo == pseudo).Id;
+                id = GetAll().FirstOrDefault(t => t.FirstName == firstName && t.LastName == lastName && t.Pseudo == pseudo).IdCharactere;
                 return id;
             }
             catch (NullReferenceException)

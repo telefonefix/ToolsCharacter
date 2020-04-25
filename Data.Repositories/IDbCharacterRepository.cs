@@ -11,7 +11,7 @@ namespace Data.Repositories
         IQueryable<Character> GetAll(bool noTracking = true);
 
         int Commit();
-        Task<int> CommitAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<int> CommitAsync(CancellationToken cancellationToken = default);
 
         TResult Execute<TResult>(string functionName, params object[] parameters);
         //void Add(Character character);

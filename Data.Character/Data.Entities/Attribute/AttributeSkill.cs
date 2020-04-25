@@ -5,18 +5,24 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using AutoMapper.Configuration.Annotations;
+using AutoMapper;
 
 namespace Data.Entities.Attribute
 {
     [Table("AttributeSkills")]
+    [AutoMap(typeof(Skill))]
     public class AttributeSkill : IAttribute<AttributeSkill>
     {
         [Key, Column(Order = 0)]
         public int IdCharactere { get; set; }
         [Key, Column(Order = 1)]
         public int Id { get; set; }
+        [Ignore]
         public int Value { get; set; }
+        [Ignore]
         public int Multiplier { get; set; }
+        [Ignore]
         public int Acquired { get; set; }
 
 

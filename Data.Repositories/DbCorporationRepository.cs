@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Data.Context;
+using Data.Entities.Attribute;
 using Data.Entities.Enterprise;
 
 namespace Data.Repositories
@@ -13,20 +14,28 @@ namespace Data.Repositories
     public class DbCorporationRepository : IDbCorporationRepository
     {
         protected CharactereContext _context;
+        private int _idCharacter;
+
         public int Id { get; set; }
 
-        public DbCorporationRepository(CharactereContext context)
+        public DbCorporationRepository(CharactereContext context,int idCharacter)
         {
             _context = context;
             _context.Configuration.LazyLoadingEnabled = false;
+            _idCharacter = idCharacter;
         }
 
-        public DbCorporationRepository()
+        public DbCorporationRepository(int idCharacter)
         {
             _context = new CharactereContext();
             _context.Configuration.LazyLoadingEnabled = false;
+            _idCharacter = idCharacter;
         }
-
+        public DbCorporationRepository()
+        {
+            _context = new CharactereContext();
+            _context.Configuration.LazyLoadingEnabled = false;            
+        }
 
 
         private Corporation Add(Corporation corporation)
@@ -34,6 +43,11 @@ namespace Data.Repositories
             return _context.Set<Corporation>().Add(corporation);
         }
 
+        private AttributeResource Add(AttributeResource attribute)
+        {
+            return _context.Set<AttributeResource>().Add(attribute);
+
+        }
         public int Commit()
         {
             throw new NotImplementedException();
@@ -60,7 +74,7 @@ namespace Data.Repositories
         {
             try
             {
-                int id = GetAll().FirstOrDefault(t => t.Name == name).IdCorporation;
+                int id = GetCorporations().FirstOrDefault(t => t.Name == name).Id;
                 return id;
             }
             catch (NullReferenceException)
@@ -114,8 +128,9 @@ namespace Data.Repositories
                 corporation.Name = name;
                 corporation.IsGang = false;
                 corporation.Color = "Yellow";
+                //Add(corporation);
 
-                //Corporation corpo = Add(corporation);
+                Corporation corpo = Add(corporation);
                 Save();
                 // Return new Id
                 //id = corpo.IdCorporation;
@@ -124,10 +139,83 @@ namespace Data.Repositories
             Id = id;
         }
 
-        public void Save()
+        public void CreateResource(string name,int value)
+        {
+            int id = GetId(name);
+            if (id == 0)
+            {
+                Corporation corporation = new Corporation
+                {
+                    Name = name,
+                    IsGang = false,
+                    Color = "Yellow"
+                };
+                //Add(corporation);
+
+                Corporation corpo = Add(corporation);
+                Save();              
+                id = GetId(name);
+            }
+            Id = id;
+            Mapper(value);
+
+        }
+
+
+
+        private IEnumerable<Corporation> GetCorporations()
+        {
+
+            DbSet<Corporation> entityDbSet = _context.Set<Corporation>();
+
+            return entityDbSet;
+        }
+
+        private IQueryable<AttributeResource> GetAttributes()
+        {
+
+            DbSet<AttributeResource> entityDbSet = _context.Set<AttributeResource>();
+
+            return entityDbSet;
+        }
+
+        private bool FoundResource(AttributeResource resource)
+        {
+            try
+            {
+                IQueryable<AttributeResource> query = GetAttributes().Where(t => t.Id == resource.Id && t.IdCharactere == resource.IdCharactere);
+                return (query.Count() != 0);
+
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
+        }
+
+        private void Mapper(int value)
+        {
+            AttributeResource resource = new AttributeResource()
+            {
+                Id = this.Id,
+                IdCharactere = _idCharacter,
+                Value = value
+            };
+
+            if (!FoundResource(resource))
+            {
+                Add(resource);
+                Save();
+            }
+       
+        }
+
+        private void Save()
         {
             _context.SaveChanges();
         }
+
+      
         #endregion
     }
 }

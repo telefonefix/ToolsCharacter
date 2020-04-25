@@ -14,9 +14,9 @@ namespace Data.Context
         public DbSet<SpecialAbility> SpecialAbilities { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Corporation> Corporations { get; set; }
-        public DbSet<Grade> Grades { get; set; }
-        public DbSet<Resource> Ressources { get; set; }
+        public DbSet<Grade> Grades { get; set; }        
         public DbSet<Ethnic> Ethnics { get; set; }
+        public DbSet<Protection> Protections { get; set; }
         public DbSet<AttributeFeature> AttributeFeatures { get; set; }
         public DbSet<AttributeSpecialAbility> AttributeSpecialAbility { get; set; }
 

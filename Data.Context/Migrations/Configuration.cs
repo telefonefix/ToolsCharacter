@@ -26,23 +26,22 @@
             SetFeature(context);
             SetEthnic(context);
             SetGrade(context);
+            SetProtection(context);
         }
         private void SetFeature(CharactereContext context)
         {
-            foreach (EnumFeatures feature in Enum.GetValues(typeof(EnumFeatures)).Cast<EnumFeatures>())
+            foreach (string feat in Enum.GetValues(typeof(EnumFeatures)).Cast<string>())
             {
-
-                Feature feat = new Feature()
+                Feature feature = new Feature()
                 {
-                    Name = feature.ToString()
+                    Name = feat
                 };
 
-                IQueryable<Feature> query = context.Features.Where(f => f.Name == feat.Name);
+                IQueryable<Feature> query = context.Features.Where(f => f.Name == feature.Name);
                 if (query.Count() == 0)
                 {
-                    context.Features.AddOrUpdate(feat);
+                    context.Features.AddOrUpdate(feature);
                 }
-
             }
         }
 
@@ -112,7 +111,7 @@
                         Category = dicoGrade[item].ToString(),
                         Quantity = i,
                         Ressource = dicoResource[item] + (i / 2),
-                        Salary = dicoSalary[item]+(i*(int)item*1000)
+                        Salary = dicoSalary[item] + (i * (int)item * 1000)
                     };
                     IQueryable<Grade> query = context.Grades.Where(f => f.Category == grade.Category);
                     if (query.Count() == 0)
@@ -122,6 +121,22 @@
                 }
             }
 
+        }
+
+        private void SetProtection(CharactereContext context)
+        {
+            foreach (EnumProtection protect in Enum.GetValues(typeof(EnumProtection)).Cast<EnumProtection>())
+            {
+                Protection protection = new Protection()
+                {
+                    Name = protect.ToString()
+                };
+                IQueryable<Protection> query = context.Protections.Where(f => f.Name == protection.Name);
+                if (query.Count() == 0)
+                {
+                    context.Protections.AddOrUpdate(protection);
+                }
+            }
         }
     }
 }

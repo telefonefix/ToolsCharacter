@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    //public interface IDbAttributeRepository<T> : IDisposable where T : class, IAttribute<T>
-    //public interface IDbAttributeRepository<TCharacterize, TAtttibute> where TCharacterize : class, ICharacteristic<TCharacterize> where TAtttibute : class, IAttribute<TAtttibute>
-    public interface IDbAttributeRepository<TCharacterize> where TCharacterize : class, ICharacteristic<TCharacterize>
+    public interface IDbAttributeRepository<T> : IDisposable where T : class, IAttribute<T>
+        //public interface IDbAttributeRepository<TCharacterize, TAtttibute> where TCharacterize : class, ICharacteristic<TCharacterize> where TAtttibute : class, IAttribute<TAtttibute>
+        //public interface IDbAttributeRepository<TCharacterize> : IDisposable where TCharacterize : class, ICharacteristic<TCharacterize>
     {
+        /*
         IQueryable<TEntity> GetAll<TEntity>(bool noTracking = true) where TEntity : class, IAttribute<TEntity>;
         TEntity Add<TEntity>(TEntity entity) where TEntity : class, IAttribute<TEntity>;
 
@@ -26,5 +27,15 @@ namespace Data.Repositories
 
         TEntity GetEntity<TEntity>(TEntity entity, int idPerson, int idCharacterize) where TEntity : class, IAttribute<TEntity>;
         //int GetId<TEntity>(TEntity entity, int idPerson, int idCharacterize) where TEntity : class, IAttribute<TEntity>;
+        */
+
+        int Commit();
+
+        Task<int> CommitAsync(CancellationToken cancellationToken = default);
+
+
+        TResult Execute<TResult>(string functionName, params object[] parameters);
+
+        TEntity Add<TEntity>(TEntity entity) where TEntity : class, IAttribute<TEntity>;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Data.Entities.Person;
+﻿using Data.Entities.Attribute;
+using Data.Entities.Person;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,19 +12,19 @@ namespace Data.Entities.Enterprise
     public class Corporation : ICorporation
     {
         [Key]
-        public int IdCorporation { get; set; }
+        public int Id { get; set; }
 
         public IGrade Grade { get; set; }
-        
-
-        #region Properties
+       
         public string Name { get; set; }
 
 
         public ICollection<Character> Characters { get; set; }
+        public ICollection<AttributeResource> AttributeResources { get; set; }
+
         public bool IsGang { get; set; }
         public string Color { get; set; }
-        #endregion Properties
+        
 
     }
 }

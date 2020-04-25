@@ -1,4 +1,5 @@
-﻿using Data.Entities.Attribute;
+﻿using AutoMapper.Configuration.Annotations;
+using Data.Entities.Attribute;
 using Data.Entities.Characterize;
 using Data.Entities.Enterprise;
 using Data.Entities.Patent;
@@ -31,18 +32,26 @@ namespace Data.Entities.Person
         /// </summary>
         #region Properties
         [Key]
-        public int Id { get; set; }
+        public int IdCharactere { get; set; }
+        [Ignore]
         public string FirstName { get; set; }
+        [Ignore]
         public string LastName { get; set; }
+        [Ignore]
         public string Pseudo { get; set; }
-        public EnumGender Gender { get; set; }        
+        [Ignore]
+        public EnumGender Gender { get; set; }
+        [Ignore]
         public int Chance { get; set; }
+        [Ignore]
         public bool Alive { get; set; }
-
-
+        [Ignore]
         public int? IdCorporation { get; set; }
+        [Ignore]
         public int? IdGrade { get; set; }
+        [Ignore]
         public int IdEthnic { get; set; }
+        
 
         public virtual Ethnic Ethnic { get; set; }
         public virtual Corporation Corporation { get; set; }

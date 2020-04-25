@@ -7,7 +7,7 @@ namespace Data.Entities.Person
 
     public interface ICharacter
     {
-        int Id { get; set; }
+        int IdCharactere { get; set; }
         string FirstName { get; set; }
 
         string LastName { get; set; }

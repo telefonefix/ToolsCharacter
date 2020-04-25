@@ -1,4 +1,5 @@
 ﻿using Data.Entities.Characterize;
+using Data.Entities.Enterprise;
 using Data.Entities.Person;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,9 @@ namespace Data.Entities.Attribute
         public int Multiplier { get; set; }
         public int Acquired { get; set; }
 
-
         public virtual Character Character { get; set; }
-
-        public virtual Resource Resource { get; set; }
+        
+        public virtual Corporation Corporation { get; set; }
 
     }
 }

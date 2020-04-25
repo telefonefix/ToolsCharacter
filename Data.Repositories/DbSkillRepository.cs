@@ -84,22 +84,22 @@ namespace Data.Repositories
         }
         public void Create(string name, string nameFeature)
         {
-            DbCharacterizeRepository<Feature> feature = new DbCharacterizeRepository<Feature>();
-                int id = GetId(name);
+            //DbCharacterizeRepository<Feature> feature = new DbCharacterizeRepository<Feature>();
+            //    int id = GetId(name);
 
-            int idFeature = feature.GetId<Feature>(new Feature(), nameFeature);
-            Skill skill = new Skill();
-            // Not found so add it
-            if (id == 0)
-            {
-                skill.Name = name.ToUpper();
-                skill.IdFeature = idFeature;
-                Add(skill);
-                Save();
-                // Return new Id
-                id = GetId(name);
-            }
-            Id = id;
+            //int idFeature = feature.GetId<Feature>(new Feature(), nameFeature);
+            //Skill skill = new Skill();
+            //// Not found so add it
+            //if (id == 0)
+            //{
+            //    skill.Name = name.ToUpper();
+            //    skill.IdFeature = idFeature;
+            //    Add(skill);
+            //    Save();
+            //    // Return new Id
+            //    id = GetId(name);
+            //}
+            //Id = id;
         }
 
         #region IDisposable Support

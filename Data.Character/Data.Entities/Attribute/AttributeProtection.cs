@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Data.Entities.Attribute
 {
+    [Table("AttributeProtections")]
     public class AttributeProtection : IAttribute<AttributeProtection>
     {
         [Key, Column(Order = 0)]

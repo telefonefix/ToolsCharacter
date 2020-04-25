@@ -18,7 +18,7 @@ namespace Data.Repositories
         TEntity AttachIfNot<TEntity>(TEntity entity);
 
         int Commit();
-        Task<int> CommitAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<int> CommitAsync(CancellationToken cancellationToken = default);
 
         TResult Execute<TResult>(string functionName, params object[] parameters);
 

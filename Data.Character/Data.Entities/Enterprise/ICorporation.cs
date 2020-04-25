@@ -1,4 +1,5 @@
-﻿using Data.Entities.Person;
+﻿using Data.Entities.Attribute;
+using Data.Entities.Person;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +14,7 @@ namespace Data.Entities.Enterprise
         /// Columns
         /// </summary>
         [Key]
-        int IdCorporation { get; set; }
+        int Id { get; set; }
         string Name { get; set; }
 
         bool IsGang { get; set; }
@@ -24,5 +25,8 @@ namespace Data.Entities.Enterprise
         /// Relationships
         /// </summary>
         ICollection<Character> Characters { get; set; }
+
+        ICollection<AttributeResource> AttributeResources { get; set; }
+
     }
 }

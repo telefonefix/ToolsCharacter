@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AutoMapper;
 using Data.Entities.Attribute;
 using Data.Entities.Characterize;
 using Data.Entities.Enterprise;
@@ -45,8 +46,7 @@ namespace Data.Factories
         //public IDictionary<string, int> Features { get; set; }
         public Feature[] Features { get; set; }
         public List<Skill> Skills { get; set; }
-        public List<SpecialAbility> SpecialAbilities { get; set; }
-        public List<Resource> Ressources { get; set; }
+        public List<SpecialAbility> SpecialAbilities { get; set; }        
         public List<Patent> Patents { get; set; }
         public ICorporation Corporation { get; set; }
 
@@ -57,6 +57,7 @@ namespace Data.Factories
         {
             Init();
             BuildDependency();
+            Mapping();
         }
         #endregion
         #region Public Methods
@@ -92,16 +93,50 @@ namespace Data.Factories
             var builder = new ContainerBuilder();
 
             builder.RegisterType<Character>().As<ICharacter>();
+
             builder.RegisterType<Skill>().As<ICharacteristic<Skill>>();
             builder.RegisterType<Feature>().As<ICharacteristic<Feature>>();
             builder.RegisterType<SpecialAbility>().As<ICharacteristic<SpecialAbility>>();
-            builder.RegisterType<Resource>().As<ICharacteristic<Resource>>();
+            builder.RegisterType<Protection>().As<ICharacteristic<Protection>>();          
+
             builder.RegisterType<Corporation>().As<ICorporation>();
             builder.RegisterType<Grade>().As<IGrade>();
+
             builder.RegisterType<Patent>().As<IPatent>();
+
+            builder.RegisterType<AttributeFeature>().As<IAttribute<AttributeFeature>>();
+            builder.RegisterType<AttributeSpecialAbility>().As<IAttribute<AttributeSpecialAbility>>();
+            builder.RegisterType<AttributeSkill>().As<IAttribute<AttributeSkill>>();
+            builder.RegisterType<AttributeFeature>().As<IAttribute<AttributeFeature>>();
+            builder.RegisterType<AttributeProtection>().As<IAttribute<AttributeProtection>>();
+
+            //builder.
 
             _container = builder.Build();
         }
+
+
+        private void Mapping()
+        {
+            //MapperConfiguration
+            //Mapper.Initialize()
+            //Action act = new Action(act=>Action);
+
+            MapperConfiguration cfgSkillToAttibute = new MapperConfiguration(cfg => cfg.CreateMap<Skill, AttributeSkill>());
+            MapperConfiguration cfgCharactereToAttibute = new MapperConfiguration(cfg => cfg.CreateMap<Character, AttributeSkill>());
+            IMapper mapSkillToAtt = cfgSkillToAttibute.CreateMapper();
+            IMapper mapCharToAtt = cfgCharactereToAttibute.CreateMapper();
+
+            Skill frmSkill = new Skill();
+            AttributeSkill toAttribSkill = mapSkillToAtt.Map<Skill, AttributeSkill>(frmSkill);
+
+
+       
+
+            //mapSkillToAtt.Map(new AttributeSkill(), new Skill());
+            //mapCharToAtt.Map(new AttributeSkill(), new Character());
+        }
+
         private void Init()
         {
             _dico = new Dictionary<string, int>();
@@ -109,7 +144,7 @@ namespace Data.Factories
             Features = new Feature[_features.Count];
             SpecialAbilities = new List<SpecialAbility>();
             Skills = new List<Skill>();
-            Ressources = new List<Resource>();
+            
             Patents = new List<Patent>();
 
             _dicGender = new Dictionary<EnumGender, string>()
@@ -123,8 +158,8 @@ namespace Data.Factories
             {
                 {typeof(Feature),"caracteristiques" },
                 {typeof(Skill),"competences" },
-                {typeof(SpecialAbility),"capacites_speciales" },
-                {typeof(Resource),"ressources" },
+                {typeof(SpecialAbility),"capacites_speciales" }, 
+                {typeof(Corporation),"ressources" },
                 {typeof(Patent),"brevets" }
             };
             _fields = GetEnumList(new EnumFields());
@@ -147,14 +182,13 @@ namespace Data.Factories
             SetName(_characterize[0].Split('('), genderEnum);
 
             SetCharacterize(new Feature());
-            SetCharacterize(new SpecialAbility());
-
-            // TODO : Revoir pour les compétences
+            SetCharacterize(new SpecialAbility());           
             SetCharacterize(new Skill());
-
-            // TODO : Revoir pour les ressources
-            SetCharacterize(new Resource());
-            ExtractPatents();
+            SetResource();
+           
+            // TODO : Faire les brevets
+            // A voit aussi pour les protections
+            //ExtractPatents();
         }
         private void SetName(string[] line, EnumGender gender)
         {
@@ -194,20 +228,16 @@ namespace Data.Factories
             //Pseudo = names[2];
         }
         /// <summary>
-        /// Rentre les valeurs
+        /// Datas for Characterize (Features, Skills, Protections, SpecialAbilities) with corresponding attributes.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <param name="dico"></param>
-        private bool SetCharacterize<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>
-        {
-            List<string> items = new List<string>();
-            List<Feature> features = new List<Feature>();
+        private void SetCharacterize<TEntity>(TEntity entity) where TEntity : class, ICharacteristic<TEntity>
+        {  
             Dictionary<string, int> dicCharacValue = new Dictionary<string, int>();
             Dictionary<string, string> dicSkillFeature = new Dictionary<string, string>();
-
-            //bool switchToArray = false;
-            int i = 1;
+           
             string message = string.Concat("Il manque les caractéristiques suivantes :", Environment.NewLine);
             _missed = new List<string>();
 
@@ -234,166 +264,44 @@ namespace Data.Factories
                 }
             }
 
-
-
-            //DbCharacterizeRepository<TEntity> repoFeature = new DbCharacterizeRepository<TEntity>();
-
-            // TODO: A voir pour optimiser cela
-
-            DbCharacterizeRepository<TEntity> repository = new DbCharacterizeRepository<TEntity>();
-            DbAttributeRepository<TEntity,TAttribute> attributeRepository = new DbAttributeRepository<TEntity, TAttribute>();
-
-            //DbCharacterizeRepository<Feature> repoFeature = new DbCharacterizeRepository<Feature>();
-            DbAttributeRepository <AttributeFeature> repoAttFeature = new DbAttributeRepository<AttributeFeature>();
-
-            DbCharacterizeRepository<SpecialAbility> repoSpecial = new DbCharacterizeRepository<SpecialAbility>();
-            DbAttributeRepository<AttributeSpecialAbility> repoAttSpecial = new DbAttributeRepository<AttributeSpecialAbility>();
-
-            DbCharacterizeRepository<Skill> repoSkill = new DbCharacterizeRepository<Skill>();
-            DbAttributeRepository<AttributeSkill> repoAttSkill = new DbAttributeRepository<AttributeSkill>();
-
-            DbCharacterizeRepository<Resource> repoResource = new DbCharacterizeRepository<Resource>();
-            DbAttributeRepository<AttributeResource> repoAttResource = new DbAttributeRepository<AttributeResource>();
+            DbCharacterizeRepository<TEntity> repository = new DbCharacterizeRepository<TEntity>(entity, _idCharactere);
 
             foreach (KeyValuePair<string, int> item in dicCharacValue)
             {
-                switch (entity)
+                if (entity.GetType() == typeof(Skill))
                 {
-                    case Feature f:
+                    string feature = string.Empty;
 
-                        //AttributeFeature attributes = new AttributeFeature();
-
-                        repository.Create<ICharacteristic<TEntity>>(entity, entity,item.Key);
-
-                        repoAttFeature.Create<IAttribute<AttributeFeature>>
-                            (
-                                new AttributeFeature(),
-                                new AttributeFeature(),
-                                _idCharactere,
-                                repository.Id,
-                                item.Value
-                             );
-                        //f = new Feature
-                        //{
-                        //    Id = i,
-                        //    Name = item.Key,
-                        //};
-                        //features.Add(f);
-                        //switchToArray = true;
-                        break;
-                    case Skill s:
-                        string feature = string.Empty;
-
-                        if (dicSkillFeature.TryGetValue(item.Key, out feature))
-                        {
-                            repoSkill.Create<ICharacteristic<Skill>>(s, new Skill(), item.Key, feature);
-                            repoAttSkill.Create<IAttribute<AttributeSkill>>
-                                (
-                                    new AttributeSkill(),
-                                    new AttributeSkill(),
-                                    _idCharactere,
-                                    repoSkill.Id,
-                                    item.Value
-                                );
-                        }
-
-
-
-                        //s = new Skill
-                        //{
-                        //    Id = i,
-                        //    Name = item.Key,
-                        //    //Value = item.Value
-                        //};
-                        Skills.Add(s);
-                        break;
-                    case SpecialAbility sa:
-                        repoSpecial.Create<ICharacteristic<SpecialAbility>>(sa, new SpecialAbility(), item.Key);
-                        repoAttSpecial.Create<IAttribute<AttributeSpecialAbility>>
-                            (
-                                new AttributeSpecialAbility(),
-                                new AttributeSpecialAbility(),
-                                _idCharactere,
-                                repoSpecial.Id,
-                                item.Value
-                            );
-                        //sa = new SpecialAbility
-                        //{
-                        //    Id = i,
-                        //    Name = item.Key,
-                        //    //Value = item.Value
-                        //};
-                        //SpecialAbilities.Add(sa);
-                        break;
-                    case Resource r:
-                        //repoResource.Create<ICharacteristic<Resource>>(r, new Resource(), item.Key);
-                        //repoAttResource.Create<IAttribute<AttributeResource>>
-                        //    (
-                        //        new AttributeResource(),
-                        //        new AttributeResource(),
-                        //        _idCharactere,
-                        //        repoResource.Id,
-                        //        item.Value
-                        //     );
-                        //r = new Resource
-                        //{
-                        //    Id = i,
-                        //    Name = item.Key,
-                        //    //Value = item.Value
-                        //};
-                        //Ressources.Add(r);
-                        break;
-                    default:
-                        throw new CharacterException("Données inconnues");
+                    if (dicSkillFeature.TryGetValue(item.Key, out feature))
+                    {
+                        repository.Create<ICharacteristic<TEntity>>(entity, entity, item.Key, item.Value, feature);
+                    }
                 }
-                i++;
+                repository.Create<ICharacteristic<TEntity>>(entity, entity, item.Key,item.Value);
             }
-            // TODO : Voir pour faire la sauvegarde vers la DB
-            switch (entity)
-            {
-                case Feature f:
-                    //repoFeature.Save();
-                    //repoAttFeature.Save();
-                    repository.Dispose();
-                    //repoFeature.Dispose();
-                    repoAttFeature.Dispose();
 
-                    break;
-
-                case SpecialAbility sa:
-                    //repoSpecial.Save();
-                    //repoAttSpecial.Save();
-
-                    repoSpecial.Dispose();
-                    repoAttSpecial.Dispose();
-                    break;
-                case Skill s:
-                    //repoSkill.Save();
-                    //repoAttSkill.Save();
-
-                    repoSkill.Dispose();
-                    repoAttSkill.Dispose();
-                    break;
-                case Resource r:
-                    //repoResource.Dispose();
-                    //repoAttResource.Dispose();
-                    break;
-                default:
-                    break;
-            }
-            //repoCharacterize.Save();
-            //repoAttFeature.Save();
-
-            //repoCharacterize.Dispose();
-
-
-            //if (switchToArray)
-            //{
-            //    Features = features.ToArray();
-            //}
-            return true;
+            repository.Dispose();
         }
 
+
+        private void SetResource()
+        {
+            Dictionary<string, int> dicCharacValue = new Dictionary<string, int>();
+
+            if (!CheckCharacterize(new Corporation(), ref dicCharacValue))
+            {
+                throw new CharacterException(string.Concat(_missed));
+            }
+
+            DbCorporationRepository repository = new DbCorporationRepository(_idCharactere);
+
+            foreach (KeyValuePair<string, int> item in dicCharacValue)
+            {   
+                repository.CreateResource(item.Key, item.Value);
+            }
+
+            repository.Dispose();
+        }
         private bool CheckSkill(ref Dictionary<string, int> dicCharacValue, ref Dictionary<string, string> dicSkillFeature)
         {
             string lineCharacterize = string.Empty;
@@ -421,7 +329,7 @@ namespace Data.Factories
             {
                 string skillValue = c.Remove(c.IndexOf("§"));
                 string skill = Regex.Replace(skillValue, @"\d+", string.Empty).ToUpper().Trim();
-                string feature = c.Substring(c.IndexOf("§") + 1).ToUpper().Trim();
+                string feature = !string.IsNullOrWhiteSpace(c.Substring(c.IndexOf("§") + 1).ToUpper().Trim()) ? c.Substring(c.IndexOf("§") + 1).ToUpper().Trim() : GetFeature(skill);
 
                 vs.Add(skillValue);
                 dicSkillFeature.Add(skill, feature);
@@ -429,6 +337,19 @@ namespace Data.Factories
 
             return vs;
 
+        }
+
+        private string GetFeature(string skill)
+        {
+            DbCharacterizeRepository<Skill> repository = new DbCharacterizeRepository<Skill>(new Skill(),_idCharactere);
+            string feature = repository.GetFeature(skill);
+
+            if (string.IsNullOrEmpty(feature))
+            {
+
+            }
+
+            return string.Empty;
         }
 
         /// <summary>
@@ -534,7 +455,7 @@ namespace Data.Factories
             _missed = new List<string>();
 
             string message = string.Empty;
-                        
+
             _missed.Add(string.Concat("Des erreurs ont été trouvé : ", Environment.NewLine));
 
             foreach (string d in datas)
@@ -544,7 +465,7 @@ namespace Data.Factories
 
                 if (!CheckFieldValue(d, ref message, ref name, ref value))
                 {
-                    _missed.Add(string.Concat(string.Format("- {0} ",message), Environment.NewLine));                    
+                    _missed.Add(string.Concat(string.Format("- {0} ", message), Environment.NewLine));
                 }
 
                 // Verifie l'existence de doublon, si doublon alors la nouvelle valeur ecrase l'ancienne
@@ -573,7 +494,7 @@ namespace Data.Factories
 
             string type = string.Empty;
             try
-            {               
+            {
                 standard = Standardization.GetStandard(_dictionnaryStandards[t.GetType()]);
             }
             catch (StandardException e)
@@ -640,7 +561,7 @@ namespace Data.Factories
             }
 
             string output = Regex.Replace(input, @"\s+", " ");
-            
+
             output = output.ToUpper();
             string checkValue = Regex.Replace(output, @"[A-ZÉÈ_\.]", string.Empty).Trim();
 
@@ -661,10 +582,10 @@ namespace Data.Factories
 
             if (!int.TryParse(checkValue, out value))
             {
-                message = string.Format("Le champ {0} n'est pas associé à une valuer entière",name);
+                message = string.Format("Le champ {0} n'est pas associé à une valuer entière", name);
                 return false;
             }
-            message = string.Format("OK : {0} = {1}",name,value);
+            message = string.Format("OK : {0} = {1}", name, value);
             return true;
         }
 
@@ -769,19 +690,12 @@ namespace Data.Factories
                         break;
                     case Skill s:
                         requiredField = "Competences";
-                        break;
+                        break;                  
                     default:
                         requiredField = "Champ optionnel";
                         break;
                 }
-                if (string.IsNullOrEmpty(datas) && (t.GetType() != typeof(Resource) || t.GetType() != typeof(SpecialAbility)))
-                {
-                    _missed.Add(string.Concat(string.Format("Aucune {0} n'a été renseigné", requiredField),
-                                     Environment.NewLine,
-                                     "Veuillez regarder un exemple",
-                                     Environment.NewLine));
-                    return false;
-                }
+                
                 return true;
             }
 
@@ -870,8 +784,10 @@ namespace Data.Factories
         }
         private bool CheckFields()
         {
-            _missed = new List<string>();
-            _missed.Add(string.Concat("Il manque les champs suivants :", Environment.NewLine));
+            _missed = new List<string>
+            {
+                string.Concat("Il manque les champs suivants :", Environment.NewLine)
+            };
 
             Dictionary<string, bool> checkedFields = new Dictionary<string, bool>();
             foreach (var f in _fields)
@@ -904,35 +820,28 @@ namespace Data.Factories
             return true;
         }
 
-
-
-        private void CreateEmployee()
-        {
-            //CorporationRepository repository = ne
-        }
-
         private void CreateEmployee(string[] employee)
         {
             string name = employee[1].ToUpper().Trim();
-            string stGrade = employee[0].ToLower().Trim();
-            int qty = stGrade.Length;
-            EnumCategory category;
+            //string stGrade = employee[0].ToLower().Trim();
+            int qty = employee[0].ToLower().Trim().Length;
+            EnumCategory category = GetEnumCategory(employee[0].ToLower().Trim());
 
-            switch (stGrade.Substring(0, 1))
-            {
-                case "o":
-                    category = EnumCategory.Circle;
-                    break;
-                case "^":
-                    category = EnumCategory.Triangle;
-                    break;
-                case "*":
-                    category = EnumCategory.Star;
-                    break;
-                default:
-                    category = EnumCategory.Circle;
-                    break;
-            }
+            //switch (stGrade.Substring(0, 1))
+            //{
+            //    case "o":
+            //        category = EnumCategory.Circle;
+            //        break;
+            //    case "^":
+            //        category = EnumCategory.Triangle;
+            //        break;
+            //    case "*":
+            //        category = EnumCategory.Star;
+            //        break;
+            //    default:
+            //        category = EnumCategory.Circle;
+            //        break;
+            //}
 
             DbCorporationRepository corpoRepository = new DbCorporationRepository();
             corpoRepository.Create(name);
@@ -961,9 +870,33 @@ namespace Data.Factories
                 Corporation = corpo;
             }
         }
+
+        private EnumCategory GetEnumCategory(string category)
+        {
+            EnumCategory eCategory;
+
+            switch (category.Substring(0, 1))
+            {
+                case "o":
+                    eCategory = EnumCategory.Circle;
+                    break;
+                case "^":
+                    eCategory = EnumCategory.Triangle;
+                    break;
+                case "*":
+                    eCategory = EnumCategory.Star;
+                    break;
+                default:
+                    eCategory = EnumCategory.Circle;
+                    break;
+            }
+            return eCategory;
+        }
+
         private string SetRank(EnumCategory category)
         {
             char r;
+            // 
             char[] rk = { '\u25CF', '\u25BC', '\u2605' };
             switch (category)
             {

@@ -152,7 +152,7 @@ namespace ToolsCharacterForm
 
         }
 
-        private void btnChangeGender_Click(object sender, EventArgs e)
+        private void BtnChangeGender_Click(object sender, EventArgs e)
         {
             FrmGender frm = new FrmGender();
             DialogResult dialogResult = frm.ShowDialog();
@@ -168,6 +168,11 @@ namespace ToolsCharacterForm
                 default:
                     return;
             }
+        }
+
+        private void BtnChangeGender_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

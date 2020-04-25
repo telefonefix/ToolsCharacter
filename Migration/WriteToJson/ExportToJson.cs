@@ -1,19 +1,21 @@
-﻿using Data.Factories;
+﻿using Data.Entities.Characterize;
+using Data.Factories;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-
+using System.Windows.Forms;
 
 namespace WriteToJson
 {
 
     public class ExportToJson
     {
-        #region Attributs        
+        #region <Attributs>        
         private List<string> _characterize;
         private IFactory _factory;
 
@@ -21,20 +23,20 @@ namespace WriteToJson
 
         private string _json;
         private string _fileName;
-        
-        #endregion
+                
+        #endregion <Attributs> 
 
-        #region Properties  
+        #region <Properties>
         public string Message { get; private set; }
         public bool Success { get; private set; }
-        #endregion
+        #endregion <Properties> 
 
-        #region Constructor
+        #region <Constructor>
         public ExportToJson()
         {
-            Init();
+            Init();            
         }
-        #endregion
+        #endregion <Constructor>
 
         #region Private Methods
         private void Init()
@@ -125,14 +127,13 @@ namespace WriteToJson
 
             Success = _factory.Success;
 
-
-
             if (Success && File.Exists(string.Format(@".\Output\{0}.json", _fileName)))
             {
                 Message = string.Format("Fichier {0}.Json {1} exporté avec succés", _fileName,Environment.NewLine);
             }
 
         }
+
         #endregion
 
         

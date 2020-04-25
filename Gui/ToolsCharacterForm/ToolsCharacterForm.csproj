@@ -70,6 +70,12 @@
     <Compile Include="ExampleForm.Designer.cs">
       <DependentUpon>ExampleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmFeature.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFeature.Designer.cs">
+      <DependentUpon>FrmFeature.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGender.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     </Compile>
     <EmbeddedResource Include="ExampleForm.resx">
       <DependentUpon>ExampleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFeature.resx">
+      <DependentUpon>FrmFeature.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGender.resx">
       <DependentUpon>FrmGender.cs</DependentUpon>
@@ -120,6 +129,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Data.Character\Data.Entities\Data.Entities.csproj">
+      <Project>{EADEF0E4-B76A-48B1-9972-A937B495601E}</Project>
+      <Name>Data.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data.Context\Data.Context.csproj">
       <Project>{61225CEB-98B4-4E74-BE11-FC1A576080EE}</Project>
       <Name>Data.Context</Name>

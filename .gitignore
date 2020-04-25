@@ -259,3 +259,11 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Gui/ToolsCharacterForm/FrmFeature.cs
+/Gui/ToolsCharacterForm/FrmFeature.Designer.cs
+/Gui/ToolsCharacterForm/FrmFeature.resx
+/Data.Context/Migrations/202004231708266_First.cs
+/Data.Context/Migrations/202004231708266_First.Designer.cs
+/Data.Context/Migrations/202004231708266_First.resx
+/MCD/Cyber_Perso.asi
+/MPD/Cyber_Person.png
