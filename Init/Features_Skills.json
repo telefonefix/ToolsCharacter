@@ -1,0 +1,405 @@
+{
+  "Features": [
+    {
+      "Id": 1,
+      "Name": "BT"
+    },
+    {
+      "Id": 2,
+      "Name": "CON"
+    },
+    {
+      "Id": 3,
+      "Name": "EMP"
+    },
+    {
+      "Id": 4,
+      "Name": "MVT"
+    },
+    {
+      "Id": 5,
+      "Name": "SF"
+    },
+    {
+      "Id": 6,
+      "Name": "TECH"
+    },
+    {
+      "Id": 7,
+      "Name": "INT"
+    },
+    {
+      "Id": 8,
+      "Name": "REF"
+    }
+  ],
+  "Skills": [
+    {
+      "Id": "1",
+      "Name": "LOOK",
+      "IdFeature": "1"
+    },
+    {
+      "Id": "2",
+      "Name": "ENDURANCE",
+      "IdFeature": "2"
+    },
+    {
+      "Id": "3",
+      "Name": "FORCE",
+      "IdFeature": "2"
+    },
+    {
+      "Id": "4",
+      "Name": "PERCEPTION HUMAINE",
+      "IdFeature": "3"
+    },
+    {
+      "Id": "5",
+      "Name": "BARATIN&PERSUASION",
+      "IdFeature": "3"
+    },
+    {
+      "Id": "6",
+      "Name": "PERFORMANCE",
+      "IdFeature": "3"
+    },
+    {
+      "Id": "7",
+      "Name": "SOCIAL",
+      "IdFeature": "3"
+    },
+    {
+      "Id": "8",
+      "Name": "MEDITATION",
+      "IdFeature": "3"
+    },
+    {
+      "Id": "9",
+      "Name": "COMMANDEMENT",
+      "IdFeature": "3"
+    },
+    {
+      "Id": "10",
+      "Name": "INTERVIEW",
+      "IdFeature": "3"
+    },
+    {
+      "Id": "11",
+      "Name": "NEGOCIATION",
+      "IdFeature": "3"
+    },
+    {
+      "Id": "12",
+      "Name": "SEDUCTION",
+      "IdFeature": "3"
+    },
+    {
+      "Id": "13",
+      "Name": "ATHLETISME",
+      "IdFeature": "4"
+    },
+    {
+      "Id": "14",
+      "Name": "NATATION",
+      "IdFeature": "4"
+    },
+    {
+      "Id": "15",
+      "Name": "ESCALADE",
+      "IdFeature": "4"
+    },
+    {
+      "Id": "16",
+      "Name": "INTIMIDATION",
+      "IdFeature": "5"
+    },
+    {
+      "Id": "17",
+      "Name": "CONNAISSANCE DE LA RUE",
+      "IdFeature": "5"
+    },
+    {
+      "Id": "18",
+      "Name": "INTERROGATOIRE",
+      "IdFeature": "5"
+    },
+    {
+      "Id": "19",
+      "Name": "RESISTER T&D",
+      "IdFeature": "5"
+    },
+    {
+      "Id": "20",
+      "Name": "SF AU COMBAT",
+      "IdFeature": "5"
+    },
+    {
+      "Id": "21",
+      "Name": "ELOQUENCE",
+      "IdFeature": "5"
+    },
+    {
+      "Id": "22",
+      "Name": "DEGUISEMENT",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "23",
+      "Name": "CONTREFACON",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "24",
+      "Name": "CROCHETAGE",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "25",
+      "Name": "SECURITE ELECTRONIQUE",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "26",
+      "Name": "ARMURERIE",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "27",
+      "Name": "PHOTO&FILMS",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "28",
+      "Name": "EXPLOSIFS",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "29",
+      "Name": "1er SOINS",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "30",
+      "Name": "PHARMACOLOGIE",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "31",
+      "Name": "ELECTRONIQUE  ",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "32",
+      "Name": "GENTECH",
+      "IdFeature": "6"
+    },
+    {
+      "Id": "33",
+      "Name": "PERCEPTION",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "34",
+      "Name": "SE CACHER/SEMER",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "35",
+      "Name": "SUIVRE PISTER",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "36",
+      "Name": "SURVIE MILIEU HOSTILE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "37",
+      "Name": "TACTIQUE MILITAIRE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "38",
+      "Name": "EVALUATION DU RISQUE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "39",
+      "Name": "GESTION",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "40",
+      "Name": "BIBLIOTHEQUE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "41",
+      "Name": "EDUCATION",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "42",
+      "Name": "BIOLOGIE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "43",
+      "Name": "MATHS",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "44",
+      "Name": "PENAL",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "45",
+      "Name": "ENSEIGNEMENT",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "46",
+      "Name": "JEU",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "47",
+      "Name": "ANATOMIE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "48",
+      "Name": "DIAGNOSTIQUE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "49",
+      "Name": "CHIMIE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "50",
+      "Name": "INVESTISSEMENT",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "51",
+      "Name": "ZOOLOGIE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "52",
+      "Name": "BOTANIQUE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "53",
+      "Name": "CONNAISSANCE DE LA MERDE",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "54",
+      "Name": "CONNAISSANCE DES SYSTEMES",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "55",
+      "Name": "CONNAISSANCE DU SYSTEME",
+      "IdFeature": "7"
+    },
+    {
+      "Id": "56",
+      "Name": "ARMES AUTO",
+      "IdFeature": "8"
+    },
+    {
+      "Id": "57",
+      "Name": "PISTOLET",
+      "IdFeature": "8"
+    },
+    {
+      "Id": "58",
+      "Name": "ARMES LOURDES",
+      "IdFeature": "8"
+    },
+    {
+      "Id": "59",
+      "Name": "FUSIL",
+      "IdFeature": "8"
+    },
+    {
+      "Id": "60",
+      "Name": "GRENADE",
+      "IdFeature": "8"
+    },
+    {
+      "Id": "61",
+      "Name": "MELEE",
+      "IdFeature": "8"
+    },
+    {
+      "Id": "62",
+      "Name": "ESQUIVE",
+      "IdFeature": "8"
+    },
+    {
+      "Id": "63",
+      "Name": "DISCRETION",
+      "IdFeature": "8"
+    },
+    {
+      "Id": "64",
+      "Name": "PICKPOCKET",
+      "IdFeature": "8"
+    },
+    {
+      "Id": "65",
+      "Name": "DANSE",
+      "IdFeature": "8"
+    }
+  ],
+  "SpecialAbilities": [
+    {
+      "Id": "1",
+      "Name": "SENS DU COMBAT"
+    },
+    {
+      "Id": "2",
+      "Name": "FURTIVITE"
+    },
+    {
+      "Id": "3",
+      "Name": "SYSTEME D"
+    },
+    {
+      "Id": "4",
+      "Name": "INTERFACE"
+    },
+    {
+      "Id": "5",
+      "Name": "AUTHORITE"
+    },
+    {
+      "Id": "6",
+      "Name": "CHARISME"
+    },
+    {
+      "Id": "7",
+      "Name": "FIXER"
+    },
+    {
+      "Id": "8",
+      "Name": "MEDTECH"
+    },
+    {
+      "Id": "9",
+      "Name": "MEDIA"
+    },
+    {
+      "Id": "10",
+      "Name": "TECHI"
+    }
+  ]
+}

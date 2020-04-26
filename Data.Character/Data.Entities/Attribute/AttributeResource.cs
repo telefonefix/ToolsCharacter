@@ -21,7 +21,7 @@ namespace Data.Entities.Attribute
 
         //  The below properties will always be the same value 
         //  Multiplier = 1 and Acquired = 0
-        public int Multiplier { get; set; }
+        public int Factor { get; set; }
         public int Acquired { get; set; }
 
         public virtual Character Character { get; set; }

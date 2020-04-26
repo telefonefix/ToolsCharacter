@@ -18,11 +18,11 @@ namespace Data.Entities.Attribute
         public int IdCharactere { get; set; }
         [Key, Column(Order = 1)]
         public int Id { get; set; }
-        [Ignore]
+
         public int Value { get; set; }
-        [Ignore]
-        public int Multiplier { get; set; }
-        [Ignore]
+
+        public int Factor { get; set; }
+
         public int Acquired { get; set; }
 
 

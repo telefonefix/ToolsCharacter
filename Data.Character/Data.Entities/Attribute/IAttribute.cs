@@ -12,7 +12,7 @@ namespace Data.Entities.Attribute
 
         int Value { get; set; }
 
-        int Multiplier { get; set; }
+        int Factor { get; set; }
 
         int Acquired { get; set; }
 

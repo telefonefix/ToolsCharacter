@@ -2,6 +2,7 @@
 using Data.Entities.Characterize;
 using Data.Entities.Enterprise;
 using Data.Entities.Person;
+using Data.Entities.Places;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
 
@@ -17,8 +18,17 @@ namespace Data.Context
         public DbSet<Grade> Grades { get; set; }        
         public DbSet<Ethnic> Ethnics { get; set; }
         public DbSet<Protection> Protections { get; set; }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<City> Cities { get; set; }
+
+
         public DbSet<AttributeFeature> AttributeFeatures { get; set; }
-        public DbSet<AttributeSpecialAbility> AttributeSpecialAbility { get; set; }
+        public DbSet<AttributeSkill> AttributeSkills { get; set; }
+        public DbSet<AttributeSpecialAbility> AttributeSpecialAbilities { get; set; }
+        public DbSet<AttributeProtection> AttributeProtections { get; set; }
+        public DbSet<AttributeResource> AttributeResources { get; set; }
+        public DbSet<AttributeKnowledgeArea> attributeKnowledgeAreas { get; set; }
+
 
 
         public CharactereContext() : base("CyberPunk3000")
@@ -50,7 +60,12 @@ namespace Data.Context
             modelBuilder.Entity<Skill>()
                 .HasRequired<Feature>(s => s.Feature)
                 .WithMany(s => s.Skills)
-                .HasForeignKey<int>(s => s.IdFeature); 
+                .HasForeignKey<int>(s => s.IdFeature);
+
+            modelBuilder.Entity<Area>()
+                .HasRequired<City>(s => s.City)
+                .WithMany(s => s.Areas)
+                .HasForeignKey<int>(s => s.IdCity);
 
             modelBuilder.Entity<AttributeFeature>().HasKey(a =>
             new
@@ -79,7 +94,12 @@ namespace Data.Context
                 a.IdCharactere,
                 a.Id
             });
-
+            modelBuilder.Entity<AttributeKnowledgeArea>().HasKey(a =>
+            new
+            {
+                a.IdCharactere,
+                a.Id
+            });
             //******************************************************************************************
             // Relationships 
             //-----------------------------------------------------------------
@@ -117,7 +137,18 @@ namespace Data.Context
                 .HasRequired(t => t.Skill)
                 .WithMany(t => t.AttributeSkills)
                 .HasForeignKey(t => t.Id);
+            //-----------------------------------------------------------------
+            //  between Characteres and Areas
+            modelBuilder.Entity<AttributeKnowledgeArea>()
+                .HasRequired(t => t.Character)
+                .WithMany(t => t.AttributeKnowledgeArea)
+                .HasForeignKey(t => t.IdCharactere);
 
+            modelBuilder.Entity<AttributeKnowledgeArea>()
+                .HasRequired(t => t.Area)
+                .WithMany(t => t.AttributeKnowledgeArea)
+                .HasForeignKey(t => t.Id);
+            //-----------------------------------------------------------------
             //******************************************************************************************
 
             //modelBuilder.Entity<Character>()

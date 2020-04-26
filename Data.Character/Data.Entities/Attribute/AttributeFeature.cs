@@ -16,13 +16,13 @@ namespace Data.Entities.Attribute
         public int IdCharactere { get; set; }
         [Key, Column(Order = 1)]
         public int Id { get; set; }
-        [Ignore]
+
         public int Value { get; set; }
         //  The below properties will always be the same value 
         //  Multiplier = 1 and Acquired = 0
-        [Ignore]
-        public int Multiplier { get; set; }
-        [Ignore]
+
+        public int Factor { get; set; }
+
         public int Acquired { get; set; }
 
         public virtual Character Character { get; set; }

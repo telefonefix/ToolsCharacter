@@ -292,7 +292,7 @@ namespace Data.Repositories
             entity.Id = this.Id;
             entity.IdCharactere = _idCharacter;
             entity.Value = value;
-            entity.Multiplier = 1;
+            entity.Factor = 1;
             entity.Acquired = 0;
 
             return entity;

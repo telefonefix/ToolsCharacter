@@ -1,0 +1,18 @@
+﻿<Window x:Class="WpfCyberPunk.WpfImportTools"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfCyberPunk"
+        mc:Ignorable="d"
+        Title="Importer personnage" Height="800" Width="1054">
+    <Grid>
+        <Label Content="Insérer le texte ci-dessous" HorizontalAlignment="Left" Height="24" Margin="10,10,0,0" VerticalAlignment="Top" Width="395"/>
+        <TextBox Name="TxtbxFrmText" HorizontalAlignment="Left" Height="680" Margin="10,40,0,0" TextWrapping="Wrap" AcceptsReturn="true" VerticalAlignment="Top" Width="1024"></TextBox>
+        <Button Name="BtnExample" Content="Voir exemple" Click="GetExample" HorizontalAlignment="Left" Height="24" Margin="10,730,0,0" VerticalAlignment="Top" Width="128"/>
+        <Button Name="BtnExport" Content="Exporter personnage" HorizontalAlignment="Left" Height="24" Margin="492,730,0,0" VerticalAlignment="Top" Width="128"/>
+        <Button Name="BtnChgGender" Content="Changer le genre" HorizontalAlignment="Left" Height="24" Margin="630,730,0,0" VerticalAlignment="Top" Width="128"/>
+        <Button Name="BtnClear" Content="Effacer texte" Click="BtnClear_Click" HorizontalAlignment="Left" Height="24" Margin="768,730,0,0" VerticalAlignment="Top" Width="128"/>
+        <Button Name="BtnClose" Content="Fermer" HorizontalAlignment="Left" Height="24" Margin="906,730,0,0" VerticalAlignment="Top" Width="128"/>
+    </Grid>
+</Window>

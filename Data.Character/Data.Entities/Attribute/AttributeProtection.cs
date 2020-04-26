@@ -16,7 +16,7 @@ namespace Data.Entities.Attribute
         [Key, Column(Order = 1)]
         public int Id { get; set; }
         public int Value { get; set; }
-        public int Multiplier { get; set; }
+        public int Factor { get; set; }
         public int Acquired { get; set; }
 
         public virtual Character Character { get; set; }
