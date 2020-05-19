@@ -29,6 +29,8 @@ namespace WriteToJson
         #region <Properties>
         public string Message { get; private set; }
         public bool Success { get; private set; }
+
+
         #endregion <Properties> 
 
         #region <Constructor>
@@ -120,7 +122,7 @@ namespace WriteToJson
             _json = JsonConvert.SerializeObject(_factory, Formatting.Indented);
             File.WriteAllText(string.Format(@".\Output\{0}.json", _fileName), _json);
 
-            if (Directory.Exists(@".\Output\"))
+            if (!Directory.Exists(@".\Output\"))
             {
                 Directory.CreateDirectory(@".\Output\");
             }

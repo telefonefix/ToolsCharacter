@@ -582,7 +582,7 @@ namespace Data.Factories
 
             if (!int.TryParse(checkValue, out value))
             {
-                message = string.Format("Le champ {0} n'est pas associé à une valuer entière", name);
+                message = string.Format("Le champ {0} n'est pas associé à une valeur entière", name);
                 return false;
             }
             message = string.Format("OK : {0} = {1}", name, value);
